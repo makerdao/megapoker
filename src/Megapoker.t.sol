@@ -4,11 +4,11 @@ import "ds-test/test.sol";
 
 import "./Megapoker.sol";
 
-contract MegapokerTest is DSTest {
-    Megapoker megapoker;
+contract MegaPokerTest is DSTest {
+    MegaPoker megapoker;
 
     function setUp() public {
-        megapoker = new Megapoker();
+        megapoker = new MegaPoker();
     }
 
     function testFail_basic_sanity() public {
