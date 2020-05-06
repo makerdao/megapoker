@@ -7,10 +7,6 @@ import "./Megapoker.sol";
 contract MegaPokerTest is DSTest {
     MegaPoker megapoker;
 
-    function setUp() public {
-        megapoker = new MegaPoker();
-    }
-
     function testFail_basic_sanity() public {
         assertTrue(false);
     }
