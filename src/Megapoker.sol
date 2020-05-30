@@ -53,8 +53,10 @@ contract MegaPoker {
         
         jug.drip("ETH-A");
         jug.drip("BAT-A");
-        jug.drip("USDC-A");
         jug.drip("WBTC-A");
+        jug.drip("USDC-A");
+        jug.drip("USDC-B");
+        jug.drip("TUSD-A");
         
         pot.drip();
     }
