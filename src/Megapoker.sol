@@ -36,14 +36,13 @@ abstract contract SpotLike {
 }
 
 contract MegaPoker {
-    OsmLike constant public eth = OsmLike(0x81FE72B5A8d1A857d176C3E7d5Bd2679A9B85763);
-    OsmLike constant public bat = OsmLike(0xB4eb54AF9Cc7882DF0121d26c5b97E802915ABe6);
-    OsmLike constant public wbtc = OsmLike(0xf185d0682d50819263941e5f4EacC763CC5C6C42);
-    OsmLike constant public knc = OsmLike(0xf185d0682d50819263941e5f4EacC763CC5C6C42);
-    OsmLike constant public zrx = OsmLike(0xf185d0682d50819263941e5f4EacC763CC5C6C42);
-    PotLike constant public pot = PotLike(0x197E90f9FAD81970bA7976f33CbD77088E5D7cf7);
-    JugLike constant public jug = JugLike(0x19c0976f590D67707E62397C87829d896Dc0f1F1);
-    SpotLike constant public spot = SpotLike(0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3);
+    OsmLike constant eth = OsmLike(0x81FE72B5A8d1A857d176C3E7d5Bd2679A9B85763);
+    OsmLike constant bat = OsmLike(0xB4eb54AF9Cc7882DF0121d26c5b97E802915ABe6);
+    OsmLike constant wbtc = OsmLike(0xf185d0682d50819263941e5f4EacC763CC5C6C42);
+    OsmLike constant knc = OsmLike(0xf36B79BD4C0904A5F350F1e4f776B81208c13069);
+    OsmLike constant zrx = OsmLike(0x7382c066801E7Acb2299aC8562847B9883f5CD3c);
+    OsmLike constant mana = OsmLike(0x8067259EA630601f319FccE477977E55C6078C13);
+    SpotLike constant spot = SpotLike(0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3);
 
     function poke() external {
         if (eth.pass()) eth.poke();
@@ -51,22 +50,13 @@ contract MegaPoker {
         if (wbtc.pass()) wbtc.poke();
         if (knc.pass()) knc.poke();
         if (zrx.pass()) zrx.poke();
+        if (mana.pass()) mana.poke();
         
         spot.poke("ETH-A");
         spot.poke("BAT-A");
         spot.poke("WBTC-A");
         spot.poke("KNC-A");
         spot.poke("ZRX-A");
-        
-        jug.drip("ETH-A");
-        jug.drip("BAT-A");
-        jug.drip("WBTC-A");
-        jug.drip("USDC-A");
-        jug.drip("USDC-B");
-        jug.drip("TUSD-A");
-        jug.drip("KNC-A");
-        jug.drip("ZRX-A");
-        
-        pot.drip();
+        spot.poke("MANA-A");
     }
 }
