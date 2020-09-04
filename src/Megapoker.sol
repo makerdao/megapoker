@@ -18,21 +18,13 @@
 
 pragma solidity >=0.5.12;
 
-abstract contract PotLike {
-    function drip() virtual external;
+interface OsmLike {
+    function poke() external;
+    function pass() external view returns (bool);
 }
 
-abstract contract JugLike {
-    function drip(bytes32) virtual external;
-}
-
-abstract contract OsmLike {
-    function poke() virtual external;
-    function pass() virtual external view returns (bool);
-}
-
-abstract contract SpotLike {
-    function poke(bytes32) virtual external;
+interface SpotLike {
+    function poke(bytes32) external;
 }
 
 contract MegaPoker {
@@ -42,6 +34,7 @@ contract MegaPoker {
     OsmLike constant knc = OsmLike(0xf36B79BD4C0904A5F350F1e4f776B81208c13069);
     OsmLike constant zrx = OsmLike(0x7382c066801E7Acb2299aC8562847B9883f5CD3c);
     OsmLike constant mana = OsmLike(0x8067259EA630601f319FccE477977E55C6078C13);
+    OsmLike constant usdt = OsmLike(0x7a5918670B0C390aD25f7beE908c1ACc2d314A3C);
     SpotLike constant spot = SpotLike(0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3);
 
     function poke() external {
@@ -51,12 +44,14 @@ contract MegaPoker {
         if (knc.pass()) knc.poke();
         if (zrx.pass()) zrx.poke();
         if (mana.pass()) mana.poke();
-        
+        if (usdt.pass()) usdt.poke();
+
         spot.poke("ETH-A");
         spot.poke("BAT-A");
         spot.poke("WBTC-A");
         spot.poke("KNC-A");
         spot.poke("ZRX-A");
         spot.poke("MANA-A");
+        spot.poke("USDT-A");
     }
 }
