@@ -38,33 +38,20 @@ contract MegaPoker {
     SpotLike constant spot = SpotLike(0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3);
 
     function poke() external {
-        if (eth.pass()) {
-            eth.poke();
-            spot.poke("ETH-A");
-        }
-        if (bat.pass()) {
-            bat.poke();
-            spot.poke("BAT-A");
-        }
-        if (wbtc.pass()) {
-            wbtc.poke();
-            spot.poke("WBTC-A");
-        }
-        if (knc.pass()) {
-            knc.poke();
-            spot.poke("KNC-A");
-        }
-        if (zrx.pass()) {
-            zrx.poke();
-            spot.poke("ZRX-A");
-        }
-        if (mana.pass()) {
-            mana.poke();
-            spot.poke("MANA-A");
-        }
-        if (usdt.pass()) {
-            usdt.poke();
-            spot.poke("USDT-A");
-        }
+        if (eth.pass()) eth.poke();
+        if (bat.pass()) bat.poke();
+        if (wbtc.pass()) wbtc.poke();
+        if (knc.pass()) knc.poke();
+        if (zrx.pass()) zrx.poke();
+        if (mana.pass()) mana.poke();
+        if (usdt.pass()) usdt.poke();
+
+        spot.poke("ETH-A");
+        spot.poke("BAT-A");
+        spot.poke("WBTC-A");
+        spot.poke("KNC-A");
+        spot.poke("ZRX-A");
+        spot.poke("MANA-A");
+        spot.poke("USDT-A");
     }
 }
