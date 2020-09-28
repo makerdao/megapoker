@@ -63,4 +63,25 @@ contract MegaPoker {
         spot.poke("LINK-A");
         spot.poke("LRC-A");
     }
+
+    function pokeTemp() external {
+        if ( eth.pass())  eth.poke();
+        if ( bat.pass())  bat.poke();
+        if (wbtc.pass()) wbtc.poke();
+        if ( knc.pass())  knc.poke();
+        if ( zrx.pass())  zrx.poke();
+        if (mana.pass()) mana.poke();
+        if (usdt.pass()) usdt.poke();
+        if (comp.pass()) comp.poke();
+        if (link.pass()) link.poke();
+        if ( lrc.pass())  lrc.poke();
+
+        spot.poke("ETH-A");
+        spot.poke("BAT-A");
+        spot.poke("WBTC-A");
+        spot.poke("KNC-A");
+        spot.poke("ZRX-A");
+        spot.poke("MANA-A");
+        spot.poke("USDT-A");
+    }
 }
