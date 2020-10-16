@@ -62,8 +62,10 @@ contract MegaPoker {
         spot.poke("COMP-A");
         spot.poke("LINK-A");
         spot.poke("LRC-A");
+        spot.poke("ETH-B");
     }
 
+    // Use for poking OSMs prior to collateral being added
     function pokeTemp() external {
         if ( eth.pass())  eth.poke();
         if ( bat.pass())  bat.poke();
@@ -83,5 +85,9 @@ contract MegaPoker {
         spot.poke("ZRX-A");
         spot.poke("MANA-A");
         spot.poke("USDT-A");
+        spot.poke("COMP-A");
+        spot.poke("LINK-A");
+        spot.poke("LRC-A");
+        spot.poke("ETH-B");
     }
 }
