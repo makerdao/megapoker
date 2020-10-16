@@ -88,5 +88,6 @@ contract MegaPoker {
         spot.poke("COMP-A");
         spot.poke("LINK-A");
         spot.poke("LRC-A");
+        spot.poke("ETH-B");
     }
 }
