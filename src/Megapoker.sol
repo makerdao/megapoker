@@ -38,8 +38,8 @@ contract MegaPoker {
     OsmLike constant comp = OsmLike(0xBED0879953E633135a48a157718Aa791AC0108E4);
     OsmLike constant link = OsmLike(0x9B0C694C6939b5EA9584e9b61C7815E8d97D9cC7);
     OsmLike constant lrc  = OsmLike(0x9eb923339c24c40Bef2f4AF4961742AA7C23EF3a);
-    OsmLike constant yfi  = OsmLike(0xf62f53A7e35362a97d826Dc30Db1B249cd12A946);
-    OsmLike constant bal  = OsmLike(0x6cEf6f267138449f31F2481F2F97777CBBB76eBF);
+    OsmLike constant yfi  = OsmLike(0x5F122465bCf86F45922036970Be6DD7F58820214);
+    OsmLike constant bal  = OsmLike(0x3ff860c0F28D69F392543A16A397D0dAe85D16dE);
     SpotLike constant spot = SpotLike(0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3);
 
     function poke() external {
