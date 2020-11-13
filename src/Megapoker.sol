@@ -40,9 +40,10 @@ contract MegaPoker {
     OsmLike constant lrc  = OsmLike(0x9eb923339c24c40Bef2f4AF4961742AA7C23EF3a);
     OsmLike constant yfi  = OsmLike(0x5F122465bCf86F45922036970Be6DD7F58820214);
     OsmLike constant bal  = OsmLike(0x3ff860c0F28D69F392543A16A397D0dAe85D16dE);
+    OsmLike constant gusd = OsmLike(0xf45Ae69CcA1b9B043dAE2C83A5B65Bc605BEc5F5);
     SpotLike constant spot = SpotLike(0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3);
 
-    function poke() external {
+    function process() internal {
         if ( eth.pass())  eth.poke();
         if ( bat.pass())  bat.poke();
         if (wbtc.pass()) wbtc.poke();
@@ -55,6 +56,7 @@ contract MegaPoker {
         if ( lrc.pass())  lrc.poke();
         if ( yfi.pass())  yfi.poke();
         if ( bal.pass())  bal.poke();
+        if (gusd.pass()) gusd.poke();
 
         spot.poke("ETH-A");
         spot.poke("BAT-A");
@@ -71,31 +73,13 @@ contract MegaPoker {
         spot.poke("BAL-A");
     }
 
+    function poke() external {
+        process();
+        spot.poke("GUSD-A");
+    }
+
     // Use for poking OSMs prior to collateral being added
     function pokeTemp() external {
-        if ( eth.pass())  eth.poke();
-        if ( bat.pass())  bat.poke();
-        if (wbtc.pass()) wbtc.poke();
-        if ( knc.pass())  knc.poke();
-        if ( zrx.pass())  zrx.poke();
-        if (mana.pass()) mana.poke();
-        if (usdt.pass()) usdt.poke();
-        if (comp.pass()) comp.poke();
-        if (link.pass()) link.poke();
-        if ( lrc.pass())  lrc.poke();
-        if ( yfi.pass())  yfi.poke();
-        if ( bal.pass())  bal.poke();
-
-        spot.poke("ETH-A");
-        spot.poke("BAT-A");
-        spot.poke("WBTC-A");
-        spot.poke("KNC-A");
-        spot.poke("ZRX-A");
-        spot.poke("MANA-A");
-        spot.poke("USDT-A");
-        spot.poke("COMP-A");
-        spot.poke("LINK-A");
-        spot.poke("LRC-A");
-        spot.poke("ETH-B");
+        process();
     }
 }
