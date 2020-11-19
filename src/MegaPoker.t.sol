@@ -114,7 +114,9 @@ contract MegaPokerTest is DSTest {
             assertTrue(!try_poke());
             waitAndCast();
         }
-        assertTrue(try_pokeTemp());
-        assertTrue(try_poke());
+        // assertTrue(try_pokeTemp());
+        // assertTrue(try_poke());
+        try_poke();
+        assertTrue(false);
     }
 }
