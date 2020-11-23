@@ -47,7 +47,6 @@ contract MegaPokerTest is DSTest {
 
     function setUp() public {
         hevm = Hevm(address(CHEAT_CODE));
-
         megaPoker = address(new MegaPoker());
     }
 
