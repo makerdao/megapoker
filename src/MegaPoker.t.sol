@@ -1,5 +1,22 @@
 // SPDX-License-Identifier: AGPL-3.0
-pragma solidity ^0.6.7;
+// The MegaPoker
+//
+// Copyright (C) 2020 Maker Ecosystem Growth Holdings, INC.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+pragma solidity ^0.6.11;
 
 import "ds-test/test.sol";
 
@@ -10,6 +27,10 @@ interface SpellLike {
     function done() external view returns (bool);
     function schedule() external;
     function cast() external;
+}
+
+interface ChainLogLike {
+    function getAddress(bytes32) external view returns (address);
 }
 
 interface PauseLike {
@@ -33,11 +54,13 @@ interface Hevm {
 }
 
 contract MegaPokerTest is DSTest {
-    SpellLike constant spell    = SpellLike(0);
+    SpellLike    constant spell     = SpellLike(0x58401b64CA6b91E346c87B057254F040990c4F98);
 
-    PauseLike constant pause    = PauseLike(0xbE286431454714F511008713973d3B053A2d38f3);
-    ChiefLike constant chief    = ChiefLike(0x9eF05f7F6deB616fd37aC3c959a2dDD25A54E4F5);
-    TokenLike constant govToken = TokenLike(0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2);
+    ChainLogLike constant changelog = ChainLogLike(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
+
+    PauseLike pause;
+    ChiefLike chief;
+    TokenLike govToken;
 
     Hevm hevm;
 
@@ -48,6 +71,9 @@ contract MegaPokerTest is DSTest {
     function setUp() public {
         hevm = Hevm(address(CHEAT_CODE));
         megaPoker = address(new MegaPoker());
+        pause = PauseLike(changelog.getAddress("MCD_PAUSE"));
+        chief = ChiefLike(changelog.getAddress("MCD_ADM"));
+        govToken = TokenLike(changelog.getAddress("MCD_GOV"));
     }
 
     function vote() private {
@@ -102,7 +128,7 @@ contract MegaPokerTest is DSTest {
     }
 
     function try_pokeTemp() internal returns (bool ok) {
-        (ok,) = megaPoker.call(abi.encodeWithSignature("poke()"));
+        (ok,) = megaPoker.call(abi.encodeWithSignature("pokeTemp()"));
     }
 
     function test_poke() public {
