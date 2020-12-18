@@ -54,7 +54,7 @@ interface Hevm {
 }
 
 contract MegaPokerTest is DSTest {
-    SpellLike    constant spell     = SpellLike(0x58401b64CA6b91E346c87B057254F040990c4F98);
+    SpellLike    constant spell     = SpellLike(0x6b8b3993cFB253968894C8EcB430CaF2455b51Aa);
 
     ChainLogLike constant changelog = ChainLogLike(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
 
