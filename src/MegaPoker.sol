@@ -80,6 +80,7 @@ contract MegaPoker {
         spot.poke("RENBTC-A");
         spot.poke("UNI-A");
         spot.poke("AAVE-A");
+        spot.poke("UNIV2DAIETH-A");
     }
 
     function poke() external {
