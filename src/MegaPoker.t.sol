@@ -40,7 +40,7 @@ interface PauseLike {
 interface ChiefLike {
     function hat() external view returns (address);
     function lift(address) external;
-    function lock(uint256) external; 
+    function lock(uint256) external;
     function vote(address[] calldata) external;
 }
 
@@ -54,7 +54,7 @@ interface Hevm {
 }
 
 contract MegaPokerTest is DSTest {
-    SpellLike    constant spell     = SpellLike(0x6b8b3993cFB253968894C8EcB430CaF2455b51Aa);
+    SpellLike    constant spell     = SpellLike(0x02b288B361539462c0Ab80FdC7eAE53E120268C7);
 
     ChainLogLike constant changelog = ChainLogLike(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
 
