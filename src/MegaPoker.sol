@@ -45,24 +45,28 @@ contract MegaPoker {
     OsmLike constant univ2daieth  = OsmLike(0x87ecBd742cEB40928E6cDE77B2f0b5CFa3342A09);
     OsmLike constant univ2wbtceth = OsmLike(0x771338D5B31754b25D2eb03Cea676877562Dec26);
     OsmLike constant univ2usdceth = OsmLike(0xECB03Fec701B93DC06d19B4639AA8b5a838472BE);
+    OsmLike constant univ2daiusdc = OsmLike(0x25CD858a00146961611b18441353603191f110A0);
+    OsmLike constant univ2ethusdt = OsmLike(0x9b015AA3e4787dd0df8B43bF2FE6d90fa543E13B);
     SpotLike constant spot        = SpotLike(0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3);
 
     function process() internal {
-        if (        eth.pass())          eth.poke();
-        if (        bat.pass())          bat.poke();
-        if (        btc.pass())          btc.poke();
-        if (        knc.pass())          knc.poke();
-        if (        zrx.pass())          zrx.poke();
-        if (       mana.pass())         mana.poke();
-        if (       usdt.pass())         usdt.poke();
-        if (       comp.pass())         comp.poke();
-        if (       link.pass())         link.poke();
-        if (        lrc.pass())          lrc.poke();
-        if (        yfi.pass())          yfi.poke();
-        if (        bal.pass())          bal.poke();
-        if (        uni.pass())          uni.poke();
-        if (       aave.pass())         aave.poke();
-        if (univ2daieth.pass())  univ2daieth.poke();
+        if (        eth.pass())           eth.poke();
+        if (        bat.pass())           bat.poke();
+        if (        btc.pass())           btc.poke();
+        if (        knc.pass())           knc.poke();
+        if (        zrx.pass())           zrx.poke();
+        if (       mana.pass())          mana.poke();
+        if (       usdt.pass())          usdt.poke();
+        if (       comp.pass())          comp.poke();
+        if (       link.pass())          link.poke();
+        if (        lrc.pass())           lrc.poke();
+        if (        yfi.pass())           yfi.poke();
+        if (        bal.pass())           bal.poke();
+        if (        uni.pass())           uni.poke();
+        if (       aave.pass())          aave.poke();
+        if (univ2daieth.pass())   univ2daieth.poke();
+        if (univ2wbtceth.pass()) univ2wbtceth.poke();
+        if (univ2usdceth.pass()) univ2usdceth.poke();
 
         spot.poke("ETH-A");
         spot.poke("BAT-A");
@@ -81,16 +85,18 @@ contract MegaPoker {
         spot.poke("UNI-A");
         spot.poke("AAVE-A");
         spot.poke("UNIV2DAIETH-A");
+        spot.poke("UNIV2WBTCETH-A");
+        spot.poke("UNIV2USDCETH-A");
     }
 
     function poke() external {
         process();
 
-        if (univ2wbtceth.pass())  univ2wbtceth.poke();
-        if (univ2usdceth.pass())  univ2usdceth.poke();
+        if (univ2daiusdc.pass()) univ2daiusdc.poke();
+        if (univ2ethusdt.pass()) univ2ethusdt.poke();
 
-        spot.poke("UNIV2WBTCETH-A");
-        spot.poke("UNIV2USDCETH-A");
+        spot.poke("UNIV2DAIUSDC-A");
+        spot.poke("UNIV2ETHUSDT-A");
     }
 
     // Use for poking OSMs prior to collateral being added
