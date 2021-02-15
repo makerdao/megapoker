@@ -54,7 +54,8 @@ interface Hevm {
 }
 
 contract MegaPokerTest is DSTest {
-    SpellLike    constant spell     = SpellLike(0x296E9C87967427c2539838535175e616eCe761d4);
+    SpellLike    constant spell     = SpellLike(0x0825152884FBe61B0FeB458Af29Cc4aB49972369);
+    SpellLike    constant prevSpell = SpellLike(0x296E9C87967427c2539838535175e616eCe761d4);
 
     ChainLogLike constant changelog = ChainLogLike(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
 
@@ -76,8 +77,8 @@ contract MegaPokerTest is DSTest {
         govToken = TokenLike(changelog.getAddress("MCD_GOV"));
     }
 
-    function vote() private {
-        if (chief.hat() != address(spell)) {
+    function vote(SpellLike spell_) private {
+        if (chief.hat() != address(spell_)) {
             hevm.store(
                 address(govToken),
                 keccak256(abi.encode(address(this), uint256(1))),
@@ -86,25 +87,25 @@ contract MegaPokerTest is DSTest {
             govToken.approve(address(chief), uint256(-1));
             chief.lock(999999999999 ether);
 
-            assertTrue(!spell.done());
+            assertTrue(!spell_.done());
 
             address[] memory yays = new address[](1);
-            yays[0] = address(spell);
+            yays[0] = address(spell_);
 
             chief.vote(yays);
-            chief.lift(address(spell));
+            chief.lift(address(spell_));
         }
-        assertEq(chief.hat(), address(spell));
+        assertEq(chief.hat(), address(spell_));
     }
 
-    function schedule() public {
-        if (spell.eta() == 0) {
-            spell.schedule();
+    function schedule(SpellLike spell_) public {
+        if (spell_.eta() == 0) {
+            spell_.schedule();
         }
         assertTrue(spell.eta() > 0);
     }
 
-    function waitAndCast() public {
+    function waitAndCast(SpellLike spell_) public {
         uint256 castTime = now + pause.delay();
 
         uint256 day = (castTime / 1 days + 3) % 7;
@@ -120,7 +121,7 @@ contract MegaPokerTest is DSTest {
         }
 
         hevm.warp(castTime);
-        spell.cast();
+        spell_.cast();
     }
 
     function try_poke() internal returns (bool ok) {
@@ -132,12 +133,17 @@ contract MegaPokerTest is DSTest {
     }
 
     function test_poke() public {
+        if (address(prevSpell) != address(0) && !prevSpell.done()) {
+            vote(prevSpell);
+            schedule(prevSpell);
+            waitAndCast(prevSpell);
+        }
         if (address(spell) != address(0) && !spell.done()) {
-            vote();
-            schedule();
+            vote(spell);
+            schedule(spell);
             assertTrue(try_pokeTemp());
             assertTrue(!try_poke());
-            waitAndCast();
+            waitAndCast(spell);
         }
         assertTrue(try_pokeTemp());
         assertTrue(try_poke());
