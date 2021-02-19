@@ -5,10 +5,10 @@
 }: with dappPkgs;
 
 mkShell {
+  DAPP_SOLC = solc-static-versions.solc_0_6_11 + "/bin/solc-0.6.11";
+  SOLC_FLAGS="--optimize --optimize-runs=1000";
   buildInputs = [
     dapp
-    hevm
-    seth
   ];
 
   shellHook = ''
