@@ -78,6 +78,7 @@ contract MegaPoker {
         if ( univ2unieth.pass())   univ2unieth.poke();
         if (univ2wbtcdai.pass())  univ2wbtcdai.poke();
         if (univ2aaveeth.pass())  univ2aaveeth.poke();
+        if (univ2daiusdt.pass())  univ2daiusdt.poke();
 
         spot.poke("ETH-A");
         spot.poke("BAT-A");
@@ -104,14 +105,13 @@ contract MegaPoker {
         spot.poke("UNIV2UNIETH-A");
         spot.poke("UNIV2WBTCDAI-A");
         spot.poke("UNIV2AAVEETH-A");
+        spot.poke("UNIV2DAIUSDT-A");
     }
 
     function poke() external {
         process();
 
-        if (univ2daiusdt.pass())  univ2daiusdt.poke();
-
-        spot.poke("UNIV2DAIUSDT-A");
+        spot.poke("ETH-C");
     }
 
     // Use for poking OSMs prior to collateral being added
