@@ -81,7 +81,6 @@ contract MegaPoker {
         if (univ2daiusdt.pass())  univ2daiusdt.poke();
 
         spot.poke("ETH-A");
-        spot.poke("ETH-B");
         spot.poke("BAT-A");
         spot.poke("WBTC-A");
         spot.poke("KNC-A");
@@ -91,6 +90,7 @@ contract MegaPoker {
         spot.poke("COMP-A");
         spot.poke("LINK-A");
         spot.poke("LRC-A");
+        spot.poke("ETH-B");
         spot.poke("YFI-A");
         spot.poke("BAL-A");
         spot.poke("RENBTC-A");
