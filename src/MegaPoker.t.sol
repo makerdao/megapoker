@@ -148,4 +148,8 @@ contract MegaPokerTest is DSTest {
         assertTrue(try_pokeTemp());
         assertTrue(try_poke());
     }
+
+    function testPokeCost() public {
+        try_poke();
+    }
 }

@@ -72,6 +72,7 @@ contract RegaPokerTest is DSTest {
     function setUp() public {
         hevm = Hevm(address(CHEAT_CODE));
         regaPoker = address(new RegaPoker());
+        RegaPoker(regaPoker).refresh();
         pause = PauseLike(changelog.getAddress("MCD_PAUSE"));
         chief = ChiefLike(changelog.getAddress("MCD_ADM"));
         govToken = TokenLike(changelog.getAddress("MCD_GOV"));
@@ -145,8 +146,20 @@ contract RegaPokerTest is DSTest {
             assertTrue(!try_poke());
             waitAndCast(spell);
         }
-        RegaPoker(regaPoker).refresh();
+
         assertTrue(try_pokeTemp());
         assertTrue(try_poke());
+    }
+
+    function testRefresh() public {
+        RegaPoker(regaPoker).refresh();
+    }
+
+    function testPoke() public {
+        RegaPoker(regaPoker).poke();
+    }
+
+    function testPokeCost() public {
+        try_poke();
     }
 }
