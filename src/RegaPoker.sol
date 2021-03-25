@@ -26,45 +26,71 @@ interface Chainlog {
     function getAddress(bytes32) external returns (address);
 }
 
+interface OSMLike {
+    function src() external returns (address);
+}
+
 contract RegaPoker {
 
-    string   constant osig = "poke(bytes32)";
-    string   constant ssig = "poke()";
+    string   constant ssig = "poke(bytes32)";
+    string   constant msig = "poke()";
+    string   constant rsig = "src()";
 
     Chainlog constant  cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
     address  immutable spot;
     IlkReg   immutable ir;
 
     bytes32[] public ilks;
-    address[] public osms;
+    address[] public meds;
+
+    event Debug(bytes debug);
+    event Debug(address);
+    event Debug(bytes20);
 
     constructor() public {
         ir = IlkReg(cl.getAddress("ILK_REGISTRY"));
         spot = cl.getAddress("MCD_SPOT");
     }
 
-    function try_opoke(address _osm) internal {
-        address(_osm).call(abi.encodeWithSignature(osig));
+    function try_mpoke(address _med) internal returns (bool ok){
+        (ok,) = _med.call(abi.encodeWithSignature(msig));
     }
 
-    function try_spoke(bytes32 _ilk) internal {
-        spot.call(abi.encodeWithSignature(ssig, _ilk));
+    function try_spoke(bytes32 _ilk) internal returns (bool ok) {
+        (ok,) = spot.call(abi.encodeWithSignature(ssig, _ilk));
+    }
+
+    function try_src(address _osm) internal returns (address src) {
+        (bool _ok, bytes memory _src) = _osm.call(abi.encodeWithSignature(rsig));
+        src = (_ok) ? bytesToAddress(_src) : address(0);
+    }
+
+    function bytesToBytes20(bytes memory _b) internal pure returns (bytes20 _result) {
+        assembly {
+            _result := mload(add(_b, 44))
+        }
+    }
+
+    function bytesToAddress(bytes memory _b) internal pure returns (address) {
+        return address(bytesToBytes20(_b));
     }
 
     function refresh() external {
         bytes32[] memory _ilks = ilks = ir.list();
-        address[] memory _osms = new address[](_ilks.length);
+        address[] memory _meds = new address[](_ilks.length);
         for (uint256 i = 0; i < _ilks.length; i++) {
-            _osms[i] = ir.pip(_ilks[i]);
+            _meds[i] = try_src(ir.pip(_ilks[i]));
         }
-        osms = _osms;
+        meds = _meds;
     }
 
     function poke() external {
         bytes32[] memory _ilks = ilks;
-        address[] memory _osms = osms;
+        address[] memory _meds = meds;
         for (uint256 i = 0; i < _ilks.length; i++) {
-            try_opoke(_osms[i]);
+            if (_meds[i] != address(0)) {
+                try_mpoke(_meds[i]);
+            }
             try_spoke(_ilks[i]);
         }
     }

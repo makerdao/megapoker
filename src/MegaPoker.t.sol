@@ -54,7 +54,7 @@ interface Hevm {
 }
 
 contract MegaPokerTest is DSTest {
-    SpellLike    constant spell     = SpellLike(0x4145774D007C88392118f32E2c31686faCc9486E);
+    SpellLike    constant spell     = SpellLike(address(0));
     SpellLike    constant prevSpell = SpellLike(address(0));
 
     ChainLogLike constant changelog = ChainLogLike(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
@@ -75,6 +75,7 @@ contract MegaPokerTest is DSTest {
         pause = PauseLike(changelog.getAddress("MCD_PAUSE"));
         chief = ChiefLike(changelog.getAddress("MCD_ADM"));
         govToken = TokenLike(changelog.getAddress("MCD_GOV"));
+        hevm.warp(now + 3600);
     }
 
     function vote(SpellLike spell_) private {

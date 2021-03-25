@@ -33,6 +33,11 @@ interface ChainLogLike {
     function getAddress(bytes32) external view returns (address);
 }
 
+
+interface VatLike {
+    function ilks(bytes32) external view returns (uint256);
+}
+
 interface PauseLike {
     function delay() external view returns (uint256);
 }
@@ -52,6 +57,7 @@ interface Hevm {
     function warp(uint256) external;
     function store(address,bytes32,bytes32) external;
 }
+
 
 contract RegaPokerTest is DSTest {
     SpellLike    constant spell     = SpellLike(address(0));
@@ -76,6 +82,7 @@ contract RegaPokerTest is DSTest {
         pause = PauseLike(changelog.getAddress("MCD_PAUSE"));
         chief = ChiefLike(changelog.getAddress("MCD_ADM"));
         govToken = TokenLike(changelog.getAddress("MCD_GOV"));
+        hevm.warp(now + 3600);
     }
 
     function vote(SpellLike spell_) private {
@@ -153,10 +160,13 @@ contract RegaPokerTest is DSTest {
 
     function testRefresh() public {
         RegaPoker(regaPoker).refresh();
+
     }
 
     function testPoke() public {
+
         RegaPoker(regaPoker).poke();
+        // TODO assertions!
     }
 
     function testPokeCost() public {
