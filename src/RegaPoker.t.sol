@@ -136,10 +136,6 @@ contract RegaPokerTest is DSTest {
         (ok,) = regaPoker.call(abi.encodeWithSignature("poke()"));
     }
 
-    function try_pokeTemp() internal returns (bool ok) {
-        (ok,) = regaPoker.call(abi.encodeWithSignature("pokeTemp()"));
-    }
-
     function test_poke() public {
         if (address(prevSpell) != address(0) && !prevSpell.done()) {
             vote(prevSpell);
@@ -149,12 +145,10 @@ contract RegaPokerTest is DSTest {
         if (address(spell) != address(0) && !spell.done()) {
             vote(spell);
             schedule(spell);
-            assertTrue(try_pokeTemp());
             assertTrue(!try_poke());
             waitAndCast(spell);
         }
 
-        assertTrue(try_pokeTemp());
         assertTrue(try_poke());
     }
 

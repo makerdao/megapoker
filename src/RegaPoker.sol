@@ -66,9 +66,4 @@ contract RegaPoker {
             (_ok,) = spot.call(abi.encodeWithSignature(ssig, _ilks[i]));
         }
     }
-
-    // Backwards compatibility
-    function pokeTemp() external {
-        this.poke();
-    }
 }
