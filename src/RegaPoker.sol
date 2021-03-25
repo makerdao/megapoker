@@ -43,10 +43,6 @@ contract RegaPoker {
     bytes32[] public ilks;
     address[] public meds;
 
-    event Debug(bytes debug);
-    event Debug(address);
-    event Debug(bytes20);
-
     constructor() public {
         ir = IlkReg(cl.getAddress("ILK_REGISTRY"));
         spot = cl.getAddress("MCD_SPOT");
