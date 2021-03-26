@@ -18,7 +18,8 @@
 
 pragma solidity ^0.6.12;
 
-contract Addresses {
+contract PokingAddresses {
+    // OSMs and Spotter addresses
     address constant eth          = 0x81FE72B5A8d1A857d176C3E7d5Bd2679A9B85763;
     address constant bat          = 0xB4eb54AF9Cc7882DF0121d26c5b97E802915ABe6;
     address constant btc          = 0xf185d0682d50819263941e5f4EacC763CC5C6C42;
@@ -46,7 +47,7 @@ contract Addresses {
     address constant spotter      = 0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3;
 }
 
-contract MegaPoker is Addresses {
+contract MegaPoker is PokingAddresses {
     function poke() external {
         bool ok;
 

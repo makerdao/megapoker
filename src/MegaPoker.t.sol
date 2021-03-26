@@ -67,7 +67,7 @@ interface Hevm {
     function store(address,bytes32,bytes32) external;
 }
 
-contract MegaPokerTest is DSTest, Addresses {
+contract MegaPokerTest is DSTest, PokingAddresses {
     SpellLike    constant spell     = SpellLike(0x4145774D007C88392118f32E2c31686faCc9486E);
     SpellLike    constant prevSpell = SpellLike(address(0));
 
