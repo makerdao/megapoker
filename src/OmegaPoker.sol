@@ -30,11 +30,10 @@ interface OSMLike {
     function src() external returns (address);
 }
 
-contract RegaPoker {
+contract OmegaPoker {
 
-    string   constant ssig = "poke(bytes32)";
-    string   constant osig = "poke()";
-    string   constant rsig = "src()";
+    bytes4   constant ssel = 0x1504460f;  // "poke(bytes32)"
+    bytes4   constant osel = 0x18178358;  // "poke()"
 
     Chainlog constant  cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
     address  immutable spot;
@@ -62,8 +61,8 @@ contract RegaPoker {
         address[] memory _osms = osms;
         bool _ok;
         for (uint256 i = 0; i < _ilks.length; i++) {
-            (_ok,) = _osms[i].call(abi.encodeWithSignature(osig));
-            (_ok,) = spot.call(abi.encodeWithSignature(ssig, _ilks[i]));
+            (_ok,) = _osms[i].call(abi.encodeWithSelector(osel));
+            (_ok,) = spot.call(abi.encodeWithSelector(ssel, _ilks[i]));
         }
     }
 }

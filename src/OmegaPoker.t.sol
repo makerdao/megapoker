@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0
-// The RegaPoker
+// The OmegaPoker
 //
 // Copyright (C) 2020 Maker Ecosystem Growth Holdings, INC.
 //
@@ -20,7 +20,7 @@ pragma solidity ^0.6.11;
 
 import "ds-test/test.sol";
 
-import "./RegaPoker.sol";
+import "./OmegaPoker.sol";
 
 interface SpellLike {
     function eta() external view returns (uint256);
@@ -59,7 +59,7 @@ interface Hevm {
 }
 
 
-contract RegaPokerTest is DSTest {
+contract OmegaPokerTest is DSTest {
     SpellLike    constant spell     = SpellLike(address(0));
     SpellLike    constant prevSpell = SpellLike(address(0));
 
@@ -71,14 +71,14 @@ contract RegaPokerTest is DSTest {
 
     Hevm hevm;
 
-    address regaPoker;
+    address omegaPoker;
 
     bytes20 constant CHEAT_CODE = bytes20(uint160(uint256(keccak256('hevm cheat code'))));
 
     function setUp() public {
         hevm = Hevm(address(CHEAT_CODE));
-        regaPoker = address(new RegaPoker());
-        RegaPoker(regaPoker).refresh();
+        omegaPoker = address(new OmegaPoker());
+        OmegaPoker(omegaPoker).refresh();
         pause = PauseLike(changelog.getAddress("MCD_PAUSE"));
         chief = ChiefLike(changelog.getAddress("MCD_ADM"));
         govToken = TokenLike(changelog.getAddress("MCD_GOV"));
@@ -133,7 +133,7 @@ contract RegaPokerTest is DSTest {
     }
 
     function try_poke() internal returns (bool ok) {
-        (ok,) = regaPoker.call(abi.encodeWithSignature("poke()"));
+        (ok,) = omegaPoker.call(abi.encodeWithSignature("poke()"));
     }
 
     function test_poke() public {
@@ -153,13 +153,13 @@ contract RegaPokerTest is DSTest {
     }
 
     function testRefresh() public {
-        RegaPoker(regaPoker).refresh();
+        OmegaPoker(omegaPoker).refresh();
 
     }
 
     function testPoke() public {
 
-        RegaPoker(regaPoker).poke();
+        OmegaPoker(omegaPoker).poke();
         // TODO assertions!
     }
 
