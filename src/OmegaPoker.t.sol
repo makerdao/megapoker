@@ -58,6 +58,10 @@ interface Hevm {
     function store(address,bytes32,bytes32) external;
 }
 
+interface OsmLike {
+    function pass() external view returns (bool);
+}
+
 
 contract OmegaPokerTest is DSTest {
     SpellLike    constant spell     = SpellLike(address(0));
@@ -71,14 +75,14 @@ contract OmegaPokerTest is DSTest {
 
     Hevm hevm;
 
-    address omegaPoker;
+    OmegaPoker omegaPoker;
 
     bytes20 constant CHEAT_CODE = bytes20(uint160(uint256(keccak256('hevm cheat code'))));
 
     function setUp() public {
         hevm = Hevm(address(CHEAT_CODE));
-        omegaPoker = address(new OmegaPoker());
-        OmegaPoker(omegaPoker).refresh();
+        omegaPoker = new OmegaPoker();
+        omegaPoker.refresh();
         pause = PauseLike(changelog.getAddress("MCD_PAUSE"));
         chief = ChiefLike(changelog.getAddress("MCD_ADM"));
         govToken = TokenLike(changelog.getAddress("MCD_GOV"));
@@ -133,7 +137,7 @@ contract OmegaPokerTest is DSTest {
     }
 
     function try_poke() internal returns (bool ok) {
-        (ok,) = omegaPoker.call(abi.encodeWithSignature("poke()"));
+        (ok,) = address(omegaPoker).call(abi.encodeWithSignature("poke()"));
     }
 
     function test_poke() public {
@@ -153,14 +157,22 @@ contract OmegaPokerTest is DSTest {
     }
 
     function testRefresh() public {
-        OmegaPoker(omegaPoker).refresh();
+        omegaPoker.refresh();
 
     }
 
     function testPoke() public {
+        for (uint i = 0; i < omegaPoker.count(); i++) {
+            OsmLike osm = OsmLike(omegaPoker.osms(i));
+            assertTrue(osm.pass());
+        }
 
-        OmegaPoker(omegaPoker).poke();
-        // TODO assertions!
+        omegaPoker.poke();
+
+        for (uint i = 0; i < omegaPoker.count(); i++) {
+            OsmLike osm = OsmLike(omegaPoker.osms(i));
+            assertTrue(!osm.pass());
+        }
     }
 
     function testPokeCost() public {

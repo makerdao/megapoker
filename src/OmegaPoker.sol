@@ -47,13 +47,28 @@ contract OmegaPoker {
         spot = cl.getAddress("MCD_SPOT");
     }
 
-    function refresh() external {
-        bytes32[] memory _ilks = ilks = ir.list();
-        address[] memory _osms = new address[](_ilks.length);
-        for (uint256 i = 0; i < _ilks.length; i++) {
-            _osms[i] = ir.pip(_ilks[i]);
+    function count() external view returns (uint256) {
+        return ilks.length;
+    }
+
+    function bytesToAddress(bytes memory bys) private pure returns (address addr) {
+        assembly {
+          addr := mload(add(bys,20))
         }
-        osms = _osms;
+    }
+
+    function refresh() external {
+        delete osms;
+        delete ilks;
+        bytes32[] memory _ilks = ir.list();
+        for (uint256 i = 0; i < _ilks.length; i++) {
+            address _pip = ir.pip(_ilks[i]);
+            (bool ok, bytes memory val) = _pip.call(abi.encodeWithSignature("src()"));
+            if (ok && bytesToAddress(val) != address(0)) {
+                osms.push(_pip);
+                ilks.push(_ilks[i]);
+            }
+        }
     }
 
     function poke() external {
