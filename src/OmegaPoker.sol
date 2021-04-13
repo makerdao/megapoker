@@ -34,6 +34,7 @@ contract OmegaPoker {
 
     bytes4   constant ssel = 0x1504460f;  // "poke(bytes32)"
     bytes4   constant osel = 0x18178358;  // "poke()"
+    bytes4   constant rsel = 0x2e7dc6af;  // "src()"
 
     Chainlog constant  cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
     address  immutable spot;
@@ -47,7 +48,11 @@ contract OmegaPoker {
         spot = cl.getAddress("MCD_SPOT");
     }
 
-    function count() external view returns (uint256) {
+    function osmCount() external view returns (uint256) {
+        return osms.length;
+    }
+
+    function ilkCount() external view returns (uint256) {
         return ilks.length;
     }
 
@@ -62,11 +67,25 @@ contract OmegaPoker {
         delete ilks;
         bytes32[] memory _ilks = ir.list();
         for (uint256 i = 0; i < _ilks.length; i++) {
+
             address _pip = ir.pip(_ilks[i]);
-            (bool ok, bytes memory val) = _pip.call(abi.encodeWithSignature("src()"));
-            if (ok && bytesToAddress(val) != address(0)) {
-                osms.push(_pip);
+
+            // OSM's and LP oracles have src() function
+            (bool ok,) = _pip.call(abi.encodeWithSelector(rsel));
+
+            if (ok) {
                 ilks.push(_ilks[i]);
+
+                bool exists;
+                for (uint j = 0; j < osms.length; j++) {
+                    if (osms[j] == _pip) {
+                        exists = true;
+                    }
+                }
+
+                if (!exists) {
+                    osms.push(_pip);
+                }
             }
         }
     }
@@ -76,8 +95,11 @@ contract OmegaPoker {
         address[] memory _osms = osms;
         bool _ok;
         for (uint256 i = 0; i < _ilks.length; i++) {
-            (_ok,) = _osms[i].call(abi.encodeWithSelector(osel));
             (_ok,) = spot.call(abi.encodeWithSelector(ssel, _ilks[i]));
         }
+        for (uint256 i = 0; i < _osms.length; i++) {
+            (_ok,) = _osms[i].call(abi.encodeWithSelector(osel));
+        }
+
     }
 }

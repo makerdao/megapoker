@@ -162,14 +162,14 @@ contract OmegaPokerTest is DSTest {
     }
 
     function testPoke() public {
-        for (uint i = 0; i < omegaPoker.count(); i++) {
+        for (uint i = 0; i < omegaPoker.osmCount(); i++) {
             OsmLike osm = OsmLike(omegaPoker.osms(i));
             assertTrue(osm.pass());
         }
 
         omegaPoker.poke();
 
-        for (uint i = 0; i < omegaPoker.count(); i++) {
+        for (uint i = 0; i < omegaPoker.osmCount(); i++) {
             OsmLike osm = OsmLike(omegaPoker.osms(i));
             assertTrue(!osm.pass());
         }
