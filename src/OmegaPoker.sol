@@ -32,9 +32,9 @@ interface OSMLike {
 
 contract OmegaPoker {
 
-    bytes4   constant ssel = 0x1504460f;  // "poke(bytes32)"
-    bytes4   constant osel = 0x18178358;  // "poke()"
-    bytes4   constant rsel = 0x2e7dc6af;  // "src()"
+    bytes4   constant spotselector = 0x1504460f;  // "poke(bytes32)"
+    bytes4   constant osmselector  = 0x18178358;  // "poke()"
+    bytes4   constant srcselector  = 0x2e7dc6af;  // "src()"
 
     Chainlog constant cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
 
@@ -66,7 +66,7 @@ contract OmegaPoker {
             address _pip = registry.pip(_ilks[i]);
 
             // OSM's and LP oracles have src() function
-            (bool ok,) = _pip.call(abi.encodeWithSelector(rsel));
+            (bool ok,) = _pip.call(abi.encodeWithSelector(srcselector));
 
             if (ok) {
                 ilks.push(_ilks[i]);
@@ -90,10 +90,10 @@ contract OmegaPoker {
         address[] memory _osms = osms;
         bool _ok;
         for (uint256 i = 0; i < _ilks.length; i++) {
-            (_ok,) = spot.call(abi.encodeWithSelector(ssel, _ilks[i]));
+            (_ok,) = spot.call(abi.encodeWithSelector(spotselector, _ilks[i]));
         }
         for (uint256 i = 0; i < _osms.length; i++) {
-            (_ok,) = _osms[i].call(abi.encodeWithSelector(osel));
+            (_ok,) = _osms[i].call(abi.encodeWithSelector(osmselector));
         }
 
     }
