@@ -36,16 +36,17 @@ contract OmegaPoker {
     bytes4   constant osel = 0x18178358;  // "poke()"
     bytes4   constant rsel = 0x2e7dc6af;  // "src()"
 
-    Chainlog constant  cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
-    address  immutable spot;
-    IlkReg   immutable ir;
+    Chainlog constant cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
 
     bytes32[] public ilks;
     address[] public osms;
 
+    IlkReg    public immutable registry;
+    address   public immutable spot;
+
     constructor() public {
-        ir = IlkReg(cl.getAddress("ILK_REGISTRY"));
-        spot = cl.getAddress("MCD_SPOT");
+        registry = IlkReg(cl.getAddress("ILK_REGISTRY"));
+        spot     = cl.getAddress("MCD_SPOT");
     }
 
     function osmCount() external view returns (uint256) {
@@ -56,19 +57,13 @@ contract OmegaPoker {
         return ilks.length;
     }
 
-    function bytesToAddress(bytes memory bys) private pure returns (address addr) {
-        assembly {
-          addr := mload(add(bys,20))
-        }
-    }
-
     function refresh() external {
         delete osms;
         delete ilks;
-        bytes32[] memory _ilks = ir.list();
+        bytes32[] memory _ilks = registry.list();
         for (uint256 i = 0; i < _ilks.length; i++) {
 
-            address _pip = ir.pip(_ilks[i]);
+            address _pip = registry.pip(_ilks[i]);
 
             // OSM's and LP oracles have src() function
             (bool ok,) = _pip.call(abi.encodeWithSelector(rsel));
