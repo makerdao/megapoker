@@ -162,28 +162,29 @@ contract OmegaPokerTest is DSTest {
 
     function testRefresh() public {
         // grant ourselves authority on the ilk registry
-        hevm.store(address(omegaPoker.registry()), keccak256(abi.encode(address(this), uint(0))), bytes32(uint(1)));
+        address registry = address(omegaPoker.registry());
+        hevm.store(registry, keccak256(abi.encode(address(this), uint(0))), bytes32(uint(1)));
 
         uint256 ilkcount = omegaPoker.ilkCount();
         uint256 osmcount = omegaPoker.osmCount();
         assertTrue(ilkcount > 1);
         assertTrue(osmcount > 1);
 
-        RegistryEdit(address(omegaPoker.registry())).removeAuth("BAT-A"); // Remove Ilk + OSM
+        RegistryEdit(registry).removeAuth("BAT-A"); // Remove Ilk + OSM
 
         omegaPoker.refresh();
 
         assertEq(omegaPoker.ilkCount(), --ilkcount);  // Remove BAT-A ilk from spot call
         assertEq(omegaPoker.osmCount(), --osmcount);  // Remove bat osm
 
-        RegistryEdit(address(omegaPoker.registry())).removeAuth("ETH-A"); // Remove Ilk but leave OSM
+        RegistryEdit(registry).removeAuth("ETH-A"); // Remove Ilk but leave OSM
 
         omegaPoker.refresh();
 
         assertEq(omegaPoker.ilkCount(), --ilkcount);  // Remove ETH-A ilk from spotter call
         assertEq(omegaPoker.osmCount(), osmcount);    // Do not remove osm because it's used by ETH-B, etc.
 
-        RegistryEdit(address(omegaPoker.registry())).removeAuth("USDC-A"); // Remove ilk without OSM
+        RegistryEdit(registry).removeAuth("USDC-A"); // Remove ilk without OSM
 
         omegaPoker.refresh();
 
