@@ -68,7 +68,8 @@ interface Hevm {
 }
 
 contract MegaPokerTest is DSTest, PokingAddresses {
-    SpellLike    constant spell     = SpellLike(0x4145774D007C88392118f32E2c31686faCc9486E);
+    //SpellLike    constant spell     = SpellLike(0x4145774D007C88392118f32E2c31686faCc9486E);
+    SpellLike    constant spell     = SpellLike(address(0));
     SpellLike    constant prevSpell = SpellLike(address(0));
 
     ChainLogLike constant changelog = ChainLogLike(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
@@ -89,6 +90,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         pause = PauseLike(changelog.getAddress("MCD_PAUSE"));
         chief = ChiefLike(changelog.getAddress("MCD_ADM"));
         govToken = TokenLike(changelog.getAddress("MCD_GOV"));
+        hevm.warp(now + 3600);
     }
 
     function mul(uint x, uint y) internal pure returns (uint z) {
@@ -147,7 +149,6 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.warp(castTime);
         spell_.cast();
     }
-
 
     function test_poke() public {
         if (address(prevSpell) != address(0) && !prevSpell.done()) {
@@ -352,5 +353,9 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("ETH-C");
         (,, spot,,) = VatLike(vat).ilks("ETH-C");
         assertEq(spot, rdiv(value, mat));
+    }
+
+    function testPokeCost() public {
+        megaPoker.poke();
     }
 }
