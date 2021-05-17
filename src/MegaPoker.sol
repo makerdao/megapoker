@@ -34,16 +34,16 @@ contract PokingAddresses {
     address constant bal          = 0x3ff860c0F28D69F392543A16A397D0dAe85D16dE;
     address constant uni          = 0xf363c7e351C96b910b92b45d34190650df4aE8e7;
     address constant aave         = 0x8Df8f06DC2dE0434db40dcBb32a82A104218754c;
-    address constant univ2daieth  = 0x87ecBd742cEB40928E6cDE77B2f0b5CFa3342A09;
-    address constant univ2wbtceth = 0x771338D5B31754b25D2eb03Cea676877562Dec26;
-    address constant univ2usdceth = 0xECB03Fec701B93DC06d19B4639AA8b5a838472BE;
-    address constant univ2daiusdc = 0x25CD858a00146961611b18441353603191f110A0;
-    address constant univ2ethusdt = 0x9b015AA3e4787dd0df8B43bF2FE6d90fa543E13B;
-    address constant univ2linketh = 0x628009F5F5029544AE84636Ef676D3Cc5755238b;
-    address constant univ2unieth  = 0x8Ce9E9442F2791FC63CD6394cC12F2dE4fbc1D71;
-    address constant univ2wbtcdai = 0x5FB5a346347ACf4FCD3AAb28f5eE518785FB0AD0;
-    address constant univ2aaveeth = 0x8D34DC2c33A6386E96cA562D8478Eaf82305b81a;
-    address constant univ2daiusdt = 0x69562A7812830E6854Ffc50b992c2AA861D5C2d3;
+    address constant univ2daieth  = 0xFc8137E1a45BAF0030563EC4F0F851bd36a85b7D;
+    address constant univ2wbtceth = 0x8400D2EDb8B97f780356Ef602b1BdBc082c2aD07;
+    address constant univ2usdceth = 0xf751f24DD9cfAd885984D1bA68860F558D21E52A;
+    address constant univ2daiusdc = 0x25D03C2C928ADE19ff9f4FFECc07d991d0df054B;
+    address constant univ2ethusdt = 0x5f6dD5B421B8d92c59dC6D907C9271b1DBFE3016;
+    address constant univ2linketh = 0xd7d31e62AE5bfC3bfaa24Eda33e8c32D31a1746F;
+    address constant univ2unieth  = 0x8462A88f50122782Cc96108F476deDB12248f931;
+    address constant univ2wbtcdai = 0x5bB72127a196392cf4aC00Cf57aB278394d24e55;
+    address constant univ2aaveeth = 0x32d8416e8538Ac36272c44b0cd962cD7E0198489;
+    address constant univ2daiusdt = 0x9A1CD705dc7ac64B50777BcEcA3529E58B1292F1;
     address constant spotter      = 0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3;
 }
 
@@ -69,7 +69,7 @@ contract MegaPoker is PokingAddresses {
         (ok,) = univ2daieth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2wbtceth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2usdceth.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = univ2daiusdc.call(abi.encodeWithSelector(0x18178358));
+        // (ok,) = univ2daiusdc.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2ethusdt.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2linketh.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2unieth.call(abi.encodeWithSelector(0x18178358));
@@ -97,7 +97,7 @@ contract MegaPoker is PokingAddresses {
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2DAIETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2WBTCETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2USDCETH-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2DAIUSDC-A")));
+        // (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2DAIUSDC-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2ETHUSDT-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2LINKETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2UNIETH-A")));
