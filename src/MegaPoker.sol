@@ -69,7 +69,7 @@ contract MegaPoker is PokingAddresses {
         (ok,) = univ2daieth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2wbtceth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2usdceth.call(abi.encodeWithSelector(0x18178358));
-        // (ok,) = univ2daiusdc.call(abi.encodeWithSelector(0x18178358));
+        (ok,) = univ2daiusdc.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2ethusdt.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2linketh.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2unieth.call(abi.encodeWithSelector(0x18178358));
@@ -97,7 +97,7 @@ contract MegaPoker is PokingAddresses {
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2DAIETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2WBTCETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2USDCETH-A")));
-        // (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2DAIUSDC-A")));
+        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2DAIUSDC-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2ETHUSDT-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2LINKETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2UNIETH-A")));
