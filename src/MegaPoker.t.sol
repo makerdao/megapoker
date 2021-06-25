@@ -68,9 +68,7 @@ interface Hevm {
 }
 
 contract MegaPokerTest is DSTest, PokingAddresses {
-    //SpellLike    constant spell     = SpellLike(0x4145774D007C88392118f32E2c31686faCc9486E);
-    SpellLike    constant spell     = SpellLike(address(0));
-    SpellLike    constant prevSpell = SpellLike(address(0));
+    SpellLike    constant spell     = SpellLike(0x8EFE2c82bD31B67fa262c0D364773629f6EA828A);
 
     ChainLogLike constant changelog = ChainLogLike(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
 
@@ -151,11 +149,18 @@ contract MegaPokerTest is DSTest, PokingAddresses {
     }
 
     function test_poke() public {
-        if (address(prevSpell) != address(0) && !prevSpell.done()) {
-            vote(prevSpell);
-            schedule(prevSpell);
-            waitAndCast(prevSpell);
+        if (address(spell) != address(0) && !spell.done()) {
+            vote(spell);
+            schedule(spell);
+            waitAndCast(spell);
         }
+
+        // To update osms without any value yet
+        hevm.warp(block.timestamp + 1 hours);
+        megaPoker.poke();
+        hevm.warp(block.timestamp + 1 hours);
+        megaPoker.poke();
+        //
 
         // Hacking nxt price to 0x123 (and making it valid)
         bytes32 hackedValue = 0x0000000000000000000000000000000100000000000000000000000000000123;
@@ -173,16 +178,16 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(bal, bytes32(uint256(4)), hackedValue);
         hevm.store(uni, bytes32(uint256(4)), hackedValue);
         hevm.store(aave, bytes32(uint256(4)), hackedValue);
-        hevm.store(univ2daieth, bytes32(uint256(7)), hackedValue);
-        hevm.store(univ2wbtceth, bytes32(uint256(7)), hackedValue);
-        hevm.store(univ2usdceth, bytes32(uint256(7)), hackedValue);
-        hevm.store(univ2daiusdc, bytes32(uint256(7)), hackedValue);
-        hevm.store(univ2ethusdt, bytes32(uint256(7)), hackedValue);
-        hevm.store(univ2linketh, bytes32(uint256(7)), hackedValue);
-        hevm.store(univ2unieth, bytes32(uint256(7)), hackedValue);
-        hevm.store(univ2wbtcdai, bytes32(uint256(7)), hackedValue);
-        hevm.store(univ2aaveeth, bytes32(uint256(7)), hackedValue);
-        hevm.store(univ2daiusdt, bytes32(uint256(7)), hackedValue);
+        hevm.store(univ2daieth, bytes32(uint256(4)), hackedValue);
+        hevm.store(univ2wbtceth, bytes32(uint256(4)), hackedValue);
+        hevm.store(univ2usdceth, bytes32(uint256(4)), hackedValue);
+        hevm.store(univ2daiusdc, bytes32(uint256(4)), hackedValue);
+        hevm.store(univ2ethusdt, bytes32(uint256(4)), hackedValue);
+        hevm.store(univ2linketh, bytes32(uint256(4)), hackedValue);
+        hevm.store(univ2unieth, bytes32(uint256(4)), hackedValue);
+        hevm.store(univ2wbtcdai, bytes32(uint256(4)), hackedValue);
+        hevm.store(univ2aaveeth, bytes32(uint256(4)), hackedValue);
+        hevm.store(univ2daiusdt, bytes32(uint256(4)), hackedValue);
 
         // Whitelisting tester address
         hevm.store(eth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
@@ -209,8 +214,6 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(univ2wbtcdai, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(univ2aaveeth, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(univ2daiusdt, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
-
-        hevm.warp(now + 3601);
 
         // 0x123
         hackedValue = 0x0000000000000000000000000000000000000000000000000000000000000123;
@@ -240,6 +243,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertTrue(OsmLike(univ2aaveeth).read() != hackedValue);
         assertTrue(OsmLike(univ2daiusdt).read() != hackedValue);
 
+        hevm.warp(block.timestamp + 1 hours);
         megaPoker.poke();
 
         assertEq(OsmLike(eth).read(), hackedValue);
@@ -355,7 +359,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertEq(spot, rdiv(value, mat));
     }
 
-    function testPokeCost() public {
-        megaPoker.poke();
-    }
+    // function testPokeCost() public {
+    //     megaPoker.poke();
+    // }
 }
