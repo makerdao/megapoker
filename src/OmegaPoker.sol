@@ -89,12 +89,11 @@ contract OmegaPoker {
         bytes32[] memory _ilks = ilks;
         address[] memory _osms = osms;
         bool _ok;
-        for (uint256 i = 0; i < _ilks.length; i++) {
-            (_ok,) = spot.call(abi.encodeWithSelector(spotselector, _ilks[i]));
-        }
         for (uint256 i = 0; i < _osms.length; i++) {
             (_ok,) = _osms[i].call(abi.encodeWithSelector(osmselector));
         }
-
+        for (uint256 i = 0; i < _ilks.length; i++) {
+            (_ok,) = spot.call(abi.encodeWithSelector(spotselector, _ilks[i]));
+        }
     }
 }
