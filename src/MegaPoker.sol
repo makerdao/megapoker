@@ -34,6 +34,7 @@ contract PokingAddresses {
     address constant bal          = 0x3ff860c0F28D69F392543A16A397D0dAe85D16dE;
     address constant uni          = 0xf363c7e351C96b910b92b45d34190650df4aE8e7;
     address constant aave         = 0x8Df8f06DC2dE0434db40dcBb32a82A104218754c;
+    address constant matic        = 0x8874964279302e6d4e523Fb1789981C39a1034Ba;
     address constant univ2daieth  = 0xFc8137E1a45BAF0030563EC4F0F851bd36a85b7D;
     address constant univ2wbtceth = 0x8400D2EDb8B97f780356Ef602b1BdBc082c2aD07;
     address constant univ2usdceth = 0xf751f24DD9cfAd885984D1bA68860F558D21E52A;
@@ -66,6 +67,7 @@ contract MegaPoker is PokingAddresses {
         (ok,) = bal.call(abi.encodeWithSelector(0x18178358));
         (ok,) = uni.call(abi.encodeWithSelector(0x18178358));
         (ok,) = aave.call(abi.encodeWithSelector(0x18178358));
+        (ok,) = matic.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2daieth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2wbtceth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2usdceth.call(abi.encodeWithSelector(0x18178358));
@@ -94,6 +96,7 @@ contract MegaPoker is PokingAddresses {
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("RENBTC-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNI-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("AAVE-A")));
+        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("MATIC-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2DAIETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2WBTCETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2USDCETH-A")));
