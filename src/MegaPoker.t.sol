@@ -188,6 +188,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(univ2wbtcdai, bytes32(uint256(4)), hackedValue);
         hevm.store(univ2aaveeth, bytes32(uint256(4)), hackedValue);
         hevm.store(univ2daiusdt, bytes32(uint256(4)), hackedValue);
+        hevm.store(matic, bytes32(uint256(4)), hackedValue);
         hevm.store(guniv3daiusdc1, bytes32(uint256(4)), hackedValue);
 
         // Whitelisting tester address
@@ -215,6 +216,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(univ2wbtcdai, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(univ2aaveeth, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(univ2daiusdt, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
+        hevm.store(matic, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(guniv3daiusdc1, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
 
         // 0x123
@@ -244,6 +246,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertTrue(OsmLike(univ2wbtcdai).read() != hackedValue);
         assertTrue(OsmLike(univ2aaveeth).read() != hackedValue);
         assertTrue(OsmLike(univ2daiusdt).read() != hackedValue);
+        assertTrue(OsmLike(matic).read() != hackedValue);
         assertTrue(OsmLike(guniv3daiusdc1).read() != hackedValue);
 
         hevm.warp(block.timestamp + 1 hours);
@@ -273,6 +276,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertEq(OsmLike(univ2wbtcdai).read(), hackedValue);
         assertEq(OsmLike(univ2aaveeth).read(), hackedValue);
         assertEq(OsmLike(univ2daiusdt).read(), hackedValue);
+        assertEq(OsmLike(matic).read(), hackedValue);
         assertEq(OsmLike(guniv3daiusdc1).read(), hackedValue);
 
         uint256 mat;
@@ -360,6 +364,9 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertEq(spot, rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("ETH-C");
         (,, spot,,) = VatLike(vat).ilks("ETH-C");
+        assertEq(spot, rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("MATIC-A");
+        (,, spot,,) = VatLike(vat).ilks("MATIC-A");
         assertEq(spot, rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("GUNIV3DAIUSDC1-A");
         (,, spot,,) = VatLike(vat).ilks("GUNIV3DAIUSDC1-A");
