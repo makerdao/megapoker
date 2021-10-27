@@ -43,6 +43,7 @@ contract PokingAddresses {
     address constant univ2aaveeth   = 0x32d8416e8538Ac36272c44b0cd962cD7E0198489;
     address constant univ2daiusdt   = 0x9A1CD705dc7ac64B50777BcEcA3529E58B1292F1;
     address constant matic          = 0x8874964279302e6d4e523Fb1789981C39a1034Ba;
+    address constant wsteth         = 0xFe7a2aC0B945f12089aEEB6eCebf4F384D9f043F;
     address constant guniv3daiusdc1 = 0x7F6d78CC0040c87943a0e0c140De3F77a273bd58;
     address constant spotter        = 0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3;
 }
@@ -75,6 +76,7 @@ contract MegaPoker is PokingAddresses {
         (ok,) = univ2aaveeth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2daiusdt.call(abi.encodeWithSelector(0x18178358));
         (ok,) = matic.call(abi.encodeWithSelector(0x18178358));
+        (ok,) = wsteth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = guniv3daiusdc1.call(abi.encodeWithSelector(0x18178358));
 
         // poke(bytes32) = 0x1504460f
@@ -104,6 +106,7 @@ contract MegaPoker is PokingAddresses {
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2DAIUSDT-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ETH-C")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("MATIC-A")));
+        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("WSTETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("GUNIV3DAIUSDC1-A")));
     }
 }
