@@ -21,13 +21,9 @@ pragma solidity ^0.6.12;
 contract PokingAddresses {
     // OSMs and Spotter addresses
     address constant eth            = 0x81FE72B5A8d1A857d176C3E7d5Bd2679A9B85763;
-    address constant bat            = 0xB4eb54AF9Cc7882DF0121d26c5b97E802915ABe6;
     address constant btc            = 0xf185d0682d50819263941e5f4EacC763CC5C6C42;
-    address constant zrx            = 0x7382c066801E7Acb2299aC8562847B9883f5CD3c;
     address constant mana           = 0x8067259EA630601f319FccE477977E55C6078C13;
     address constant comp           = 0xBED0879953E633135a48a157718Aa791AC0108E4;
-    address constant link           = 0x9B0C694C6939b5EA9584e9b61C7815E8d97D9cC7;
-    address constant lrc            = 0x9eb923339c24c40Bef2f4AF4961742AA7C23EF3a;
     address constant yfi            = 0x5F122465bCf86F45922036970Be6DD7F58820214;
     address constant bal            = 0x3ff860c0F28D69F392543A16A397D0dAe85D16dE;
     address constant uni            = 0xf363c7e351C96b910b92b45d34190650df4aE8e7;
@@ -52,13 +48,9 @@ contract MegaPoker is PokingAddresses {
 
         // poke() = 0x18178358
         (ok,) = eth.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = bat.call(abi.encodeWithSelector(0x18178358));
         (ok,) = btc.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = zrx.call(abi.encodeWithSelector(0x18178358));
         (ok,) = mana.call(abi.encodeWithSelector(0x18178358));
         (ok,) = comp.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = link.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = lrc.call(abi.encodeWithSelector(0x18178358));
         (ok,) = yfi.call(abi.encodeWithSelector(0x18178358));
         (ok,) = bal.call(abi.encodeWithSelector(0x18178358));
         (ok,) = uni.call(abi.encodeWithSelector(0x18178358));
@@ -77,13 +69,9 @@ contract MegaPoker is PokingAddresses {
 
         // poke(bytes32) = 0x1504460f
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ETH-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAT-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("WBTC-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ZRX-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("MANA-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("COMP-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LINK-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LRC-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ETH-B")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("YFI-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAL-A")));

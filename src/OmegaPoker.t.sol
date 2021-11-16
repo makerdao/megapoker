@@ -170,7 +170,7 @@ contract OmegaPokerTest is DSTest {
         assertTrue(ilkcount > 1);
         assertTrue(osmcount > 1);
 
-        RegistryEdit(registry).removeAuth("BAT-A"); // Remove Ilk + OSM
+        RegistryEdit(registry).removeAuth("UNI-A"); // Remove Ilk + OSM
 
         omegaPoker.refresh();
 
