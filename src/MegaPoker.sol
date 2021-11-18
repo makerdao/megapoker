@@ -47,18 +47,17 @@ contract PokingAddresses {
 }
 
 contract MegaPoker is PokingAddresses {
+
+    uint256 public lastPoke;
+
     function poke() external {
         bool ok;
 
         // poke() = 0x18178358
         (ok,) = eth.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = bat.call(abi.encodeWithSelector(0x18178358));
         (ok,) = btc.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = zrx.call(abi.encodeWithSelector(0x18178358));
         (ok,) = mana.call(abi.encodeWithSelector(0x18178358));
         (ok,) = comp.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = link.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = lrc.call(abi.encodeWithSelector(0x18178358));
         (ok,) = yfi.call(abi.encodeWithSelector(0x18178358));
         (ok,) = bal.call(abi.encodeWithSelector(0x18178358));
         (ok,) = uni.call(abi.encodeWithSelector(0x18178358));
@@ -73,17 +72,13 @@ contract MegaPoker is PokingAddresses {
         (ok,) = univ2aaveeth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = matic.call(abi.encodeWithSelector(0x18178358));
         (ok,) = wsteth.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = guniv3daiusdc1.call(abi.encodeWithSelector(0x18178358));
+
 
         // poke(bytes32) = 0x1504460f
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ETH-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAT-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("WBTC-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ZRX-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("MANA-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("COMP-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LINK-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LRC-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ETH-B")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("YFI-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAL-A")));
@@ -101,6 +96,24 @@ contract MegaPoker is PokingAddresses {
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ETH-C")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("MATIC-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("WSTETH-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("GUNIV3DAIUSDC1-A")));
+
+
+        // Daily pokes
+        //  Reduced cost pokes
+        if (lastPoke <= block.timestamp - 1 days) {
+            (ok,) = bat.call(abi.encodeWithSelector(0x18178358));
+            (ok,) = zrx.call(abi.encodeWithSelector(0x18178358));
+            (ok,) = link.call(abi.encodeWithSelector(0x18178358));
+            (ok,) = lrc.call(abi.encodeWithSelector(0x18178358));
+            (ok,) = guniv3daiusdc1.call(abi.encodeWithSelector(0x18178358));
+
+            (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAT-A")));
+            (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ZRX-A")));
+            (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LINK-A")));
+            (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LRC-A")));
+            (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("GUNIV3DAIUSDC1-A")));
+        }
+
+        lastPoke = block.timestamp;
     }
 }
