@@ -245,13 +245,9 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         megaPoker.poke();
 
         assertEq(OsmLike(eth).read(), hackedValue);
-        assertEq(OsmLike(bat).read(), hackedValue);
         assertEq(OsmLike(btc).read(), hackedValue);
-        assertEq(OsmLike(zrx).read(), hackedValue);
         assertEq(OsmLike(mana).read(), hackedValue);
         assertEq(OsmLike(comp).read(), hackedValue);
-        assertEq(OsmLike(link).read(), hackedValue);
-        assertEq(OsmLike(lrc).read(), hackedValue);
         assertEq(OsmLike(yfi).read(), hackedValue);
         assertEq(OsmLike(bal).read(), hackedValue);
         assertEq(OsmLike(uni).read(), hackedValue);
@@ -266,6 +262,11 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertEq(OsmLike(univ2aaveeth).read(), hackedValue);
         assertEq(OsmLike(matic).read(), hackedValue);
         assertEq(OsmLike(wsteth).read(), hackedValue);
+
+        assertEq(OsmLike(bat).read(), hackedValue);
+        assertEq(OsmLike(link).read(), hackedValue);
+        assertEq(OsmLike(zrx).read(), hackedValue);
+        assertEq(OsmLike(lrc).read(), hackedValue);
         assertEq(OsmLike(guniv3daiusdc1).read(), hackedValue);
 
         uint256 mat;

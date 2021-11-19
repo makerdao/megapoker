@@ -48,7 +48,7 @@ contract PokingAddresses {
 
 contract MegaPoker is PokingAddresses {
 
-    uint256 public lastPoke;
+    uint256 public last;
 
     function poke() external {
         bool ok;
@@ -100,7 +100,7 @@ contract MegaPoker is PokingAddresses {
 
         // Daily pokes
         //  Reduced cost pokes
-        if (lastPoke <= block.timestamp - 1 days) {
+        if (last <= block.timestamp - 1 days) {
             (ok,) = bat.call(abi.encodeWithSelector(0x18178358));
             (ok,) = zrx.call(abi.encodeWithSelector(0x18178358));
             (ok,) = link.call(abi.encodeWithSelector(0x18178358));
@@ -112,8 +112,8 @@ contract MegaPoker is PokingAddresses {
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LINK-A")));
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LRC-A")));
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("GUNIV3DAIUSDC1-A")));
-        }
 
-        lastPoke = block.timestamp;
+            last = block.timestamp;
+        }
     }
 }
