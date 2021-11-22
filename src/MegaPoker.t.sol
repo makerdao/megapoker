@@ -340,6 +340,9 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("WSTETH-A");
         (,, spot,,) = VatLike(vat).ilks("WSTETH-A");
         assertEq(spot, rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("WBTC-B");
+        (,, spot,,) = VatLike(vat).ilks("WBTC-B");
+        assertEq(spot, rdiv(value, mat));
 
         // These collateral types should not be updated after 1 hour
         (, mat) = SpotLike(spotter).ilks("BAT-A");
@@ -357,9 +360,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("GUNIV3DAIUSDC1-A");
         (,, spot,,) = VatLike(vat).ilks("GUNIV3DAIUSDC1-A");
         assertTrue(spot != rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("WBTC-B");
-        (,, spot,,) = VatLike(vat).ilks("WBTC-B");
-        assertEq(spot, rdiv(value, mat));
+
 
         // Daily OSM's are eligible 24 hours after first poked
         hevm.warp(megaPoker.last() + 24 hours);
