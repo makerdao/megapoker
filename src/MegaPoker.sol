@@ -105,6 +105,8 @@ contract MegaPoker is PokingAddresses {
             (ok,) = bat.call(abi.encodeWithSelector(0x18178358));
             (ok,) = zrx.call(abi.encodeWithSelector(0x18178358));
             (ok,) = lrc.call(abi.encodeWithSelector(0x18178358));
+            // The GUINIV3DAIUSDC1-A Oracle is very expensive to poke, and the price should not
+            //  change frequently, so it is getting poked only once a day.
             (ok,) = guniv3daiusdc1.call(abi.encodeWithSelector(0x18178358));
 
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAT-A")));
