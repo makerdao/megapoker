@@ -59,7 +59,6 @@ contract MegaPoker is PokingAddresses {
         (ok,) = comp.call(abi.encodeWithSelector(0x18178358));
         (ok,) = link.call(abi.encodeWithSelector(0x18178358));
         (ok,) = yfi.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = bal.call(abi.encodeWithSelector(0x18178358));
         (ok,) = uni.call(abi.encodeWithSelector(0x18178358));
         (ok,) = aave.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2daieth.call(abi.encodeWithSelector(0x18178358));
@@ -81,7 +80,6 @@ contract MegaPoker is PokingAddresses {
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LINK-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ETH-B")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("YFI-A")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAL-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("RENBTC-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNI-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("AAVE-A")));
@@ -105,6 +103,7 @@ contract MegaPoker is PokingAddresses {
             (ok,) = bat.call(abi.encodeWithSelector(0x18178358));
             (ok,) = zrx.call(abi.encodeWithSelector(0x18178358));
             (ok,) = lrc.call(abi.encodeWithSelector(0x18178358));
+            (ok,) = bal.call(abi.encodeWithSelector(0x18178358));
             // The GUINIV3DAIUSDC1-A Oracle is very expensive to poke, and the price should not
             //  change frequently, so it is getting poked only once a day.
             (ok,) = guniv3daiusdc1.call(abi.encodeWithSelector(0x18178358));
@@ -112,6 +111,7 @@ contract MegaPoker is PokingAddresses {
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAT-A")));
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ZRX-A")));
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LRC-A")));
+            (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAL-A")));
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("GUNIV3DAIUSDC1-A")));
 
             last = block.timestamp;
