@@ -158,6 +158,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         // To update osms without any value yet
         hevm.warp(block.timestamp + 1 hours);
         megaPoker.poke();
+        assertEq(megaPoker.last(), block.timestamp);
         hevm.warp(block.timestamp + 1 hours);
         megaPoker.poke();
         //
@@ -241,7 +242,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertTrue(OsmLike(lrc).read() != hackedValue);
         assertTrue(OsmLike(guniv3daiusdc1).read() != hackedValue);
 
-        hevm.warp(block.timestamp + 1 days);
+        hevm.warp(block.timestamp + 1 hours);
         megaPoker.poke();
 
         assertEq(OsmLike(eth).read(), hackedValue);
@@ -263,11 +264,12 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertEq(OsmLike(matic).read(), hackedValue);
         assertEq(OsmLike(wsteth).read(), hackedValue);
 
-        assertEq(OsmLike(bat).read(), hackedValue);
-        assertEq(OsmLike(link).read(), hackedValue);
-        assertEq(OsmLike(zrx).read(), hackedValue);
-        assertEq(OsmLike(lrc).read(), hackedValue);
-        assertEq(OsmLike(guniv3daiusdc1).read(), hackedValue);
+        // Daily OSM's are not updated after one hour
+        assertTrue(OsmLike(bat).read() != hackedValue);
+        assertTrue(OsmLike(link).read() != hackedValue);
+        assertTrue(OsmLike(zrx).read() != hackedValue);
+        assertTrue(OsmLike(lrc).read() != hackedValue);
+        assertTrue(OsmLike(guniv3daiusdc1).read() != hackedValue);
 
         uint256 mat;
         uint256 spot;
@@ -277,26 +279,14 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("ETH-A");
         (,, spot,,) = VatLike(vat).ilks("ETH-A");
         assertEq(spot, rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("BAT-A");
-        (,, spot,,) = VatLike(vat).ilks("BAT-A");
-        assertEq(spot, rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("WBTC-A");
         (,, spot,,) = VatLike(vat).ilks("WBTC-A");
-        assertEq(spot, rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("ZRX-A");
-        (,, spot,,) = VatLike(vat).ilks("ZRX-A");
         assertEq(spot, rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("MANA-A");
         (,, spot,,) = VatLike(vat).ilks("MANA-A");
         assertEq(spot, rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("COMP-A");
         (,, spot,,) = VatLike(vat).ilks("COMP-A");
-        assertEq(spot, rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("LINK-A");
-        (,, spot,,) = VatLike(vat).ilks("LINK-A");
-        assertEq(spot, rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("LRC-A");
-        (,, spot,,) = VatLike(vat).ilks("LRC-A");
         assertEq(spot, rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("ETH-B");
         (,, spot,,) = VatLike(vat).ilks("ETH-B");
@@ -349,9 +339,53 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("WSTETH-A");
         (,, spot,,) = VatLike(vat).ilks("WSTETH-A");
         assertEq(spot, rdiv(value, mat));
+
+        // These collateral types should not be updated after 1 hour
+        (, mat) = SpotLike(spotter).ilks("BAT-A");
+        (,, spot,,) = VatLike(vat).ilks("BAT-A");
+        assertTrue(spot != rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("LINK-A");
+        (,, spot,,) = VatLike(vat).ilks("LINK-A");
+        assertTrue(spot != rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("ZRX-A");
+        (,, spot,,) = VatLike(vat).ilks("ZRX-A");
+        assertTrue(spot != rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("LRC-A");
+        (,, spot,,) = VatLike(vat).ilks("LRC-A");
+        assertTrue(spot != rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("GUNIV3DAIUSDC1-A");
+        (,, spot,,) = VatLike(vat).ilks("GUNIV3DAIUSDC1-A");
+        assertTrue(spot != rdiv(value, mat));
+
+        // Daily OSM's are eligible 24 hours after first poked
+        hevm.warp(megaPoker.last() + 24 hours);
+        megaPoker.poke();
+
+        assertEq(OsmLike(bat).read(), hackedValue);
+        assertEq(OsmLike(link).read(), hackedValue);
+        assertEq(OsmLike(zrx).read(), hackedValue);
+        assertEq(OsmLike(lrc).read(), hackedValue);
+        assertEq(OsmLike(guniv3daiusdc1).read(), hackedValue);
+
+
+        (, mat) = SpotLike(spotter).ilks("BAT-A");
+        (,, spot,,) = VatLike(vat).ilks("BAT-A");
+        assertEq(spot, rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("LINK-A");
+        (,, spot,,) = VatLike(vat).ilks("LINK-A");
+        assertEq(spot, rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("ZRX-A");
+        (,, spot,,) = VatLike(vat).ilks("ZRX-A");
+        assertEq(spot, rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("LRC-A");
+        (,, spot,,) = VatLike(vat).ilks("LRC-A");
+        assertEq(spot, rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("GUNIV3DAIUSDC1-A");
         (,, spot,,) = VatLike(vat).ilks("GUNIV3DAIUSDC1-A");
         assertEq(spot, rdiv(value, mat));
+
+
+
     }
 
     // function testPokeCost() public {
