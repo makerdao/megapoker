@@ -161,6 +161,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertEq(megaPoker.last(), block.timestamp);
         hevm.warp(block.timestamp + 1 hours);
         megaPoker.poke();
+        assertEq(megaPoker.last(), block.timestamp - 1 hours);
         //
 
         // Hacking nxt price to 0x123 (and making it valid)
@@ -363,6 +364,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         // Daily OSM's are eligible 24 hours after first poked
         hevm.warp(megaPoker.last() + 24 hours);
         megaPoker.poke();
+        assertEq(megaPoker.last(), block.timestamp);
 
         assertEq(OsmLike(bat).read(), hackedValue);
         assertEq(OsmLike(link).read(), hackedValue);
