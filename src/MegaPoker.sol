@@ -39,7 +39,6 @@ contract PokingAddresses {
     address constant univ2linketh   = 0xd7d31e62AE5bfC3bfaa24Eda33e8c32D31a1746F;
     address constant univ2unieth    = 0x8462A88f50122782Cc96108F476deDB12248f931;
     address constant univ2wbtcdai   = 0x5bB72127a196392cf4aC00Cf57aB278394d24e55;
-    address constant univ2aaveeth   = 0x32d8416e8538Ac36272c44b0cd962cD7E0198489;
     address constant matic          = 0x8874964279302e6d4e523Fb1789981C39a1034Ba;
     address constant wsteth         = 0xFe7a2aC0B945f12089aEEB6eCebf4F384D9f043F;
     address constant guniv3daiusdc1 = 0x7F6d78CC0040c87943a0e0c140De3F77a273bd58;
@@ -70,7 +69,6 @@ contract MegaPoker is PokingAddresses {
         (ok,) = univ2linketh.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2unieth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = univ2wbtcdai.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = univ2aaveeth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = matic.call(abi.encodeWithSelector(0x18178358));
         (ok,) = wsteth.call(abi.encodeWithSelector(0x18178358));
 
