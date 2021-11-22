@@ -285,6 +285,9 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("COMP-A");
         (,, spot,,) = VatLike(vat).ilks("COMP-A");
         assertEq(spot, rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("LINK-A");
+        (,, spot,,) = VatLike(vat).ilks("LINK-A");
+        assertEq(spot, rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("ETH-B");
         (,, spot,,) = VatLike(vat).ilks("ETH-B");
         assertEq(spot, rdiv(value, mat));
@@ -369,9 +372,6 @@ contract MegaPokerTest is DSTest, PokingAddresses {
 
         (, mat) = SpotLike(spotter).ilks("BAT-A");
         (,, spot,,) = VatLike(vat).ilks("BAT-A");
-        assertEq(spot, rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("LINK-A");
-        (,, spot,,) = VatLike(vat).ilks("LINK-A");
         assertEq(spot, rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("ZRX-A");
         (,, spot,,) = VatLike(vat).ilks("ZRX-A");
