@@ -68,7 +68,7 @@ interface Hevm {
 }
 
 contract MegaPokerTest is DSTest, PokingAddresses {
-    SpellLike    constant spell     = SpellLike(0xc0Dc70048F678e0c9DA82aD11CdC063aA081d950);
+    SpellLike    constant spell     = SpellLike(0);
 
     ChainLogLike constant changelog = ChainLogLike(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
 
@@ -356,6 +356,9 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("GUNIV3DAIUSDC1-A");
         (,, spot,,) = VatLike(vat).ilks("GUNIV3DAIUSDC1-A");
         assertTrue(spot != rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("WBTC-B");
+        (,, spot,,) = VatLike(vat).ilks("WBTC-B");
+        assertEq(spot, rdiv(value, mat));
 
         // Daily OSM's are eligible 24 hours after first poked
         hevm.warp(megaPoker.last() + 24 hours);
@@ -383,9 +386,6 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("GUNIV3DAIUSDC1-A");
         (,, spot,,) = VatLike(vat).ilks("GUNIV3DAIUSDC1-A");
         assertEq(spot, rdiv(value, mat));
-
-
-
     }
 
     // function testPokeCost() public {
