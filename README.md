@@ -9,7 +9,9 @@ MegaPoker curent Mainnet Address: [0x1cFd93A4864bEC32C12c77594c2ec79DeeC16038](h
 
 # OmegaPoker
 
-Extensible poker for Kovan and backup for Mainnet.
+Extensible poker for Goerli, Kovan and backup for Mainnet.
+
+OmegaPoker Goerli Address: [0x091971A1DdDF12450D0D7003A29cD9fb94f8e54c](https://goerli.etherscan.io/address/0x091971a1dddf12450d0d7003a29cd9fb94f8e54c#code)
 
 OmegaPoker Kovan Address: [0x7e2531587d25b9fc58aA051D0f19c0Ae809316E9](https://kovan.etherscan.io/address/0x7e2531587d25b9fc58aa051d0f19c0ae809316e9#code)
 
