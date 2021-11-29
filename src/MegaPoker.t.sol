@@ -333,6 +333,9 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("WBTC-B");
         (,, spot,,) = VatLike(vat).ilks("WBTC-B");
         assertEq(spot, rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("WBTC-C");
+        (,, spot,,) = VatLike(vat).ilks("WBTC-C");
+        assertEq(spot, rdiv(value, mat));
 
         // These collateral types should not be updated after 1 hour
         (, mat) = SpotLike(spotter).ilks("BAT-A");
