@@ -1,26 +1,28 @@
-# megapoker
+# MegaPoker
 ![Build Status](https://github.com/makerdao/megapoker/actions/workflows/.github/workflows/tests.yaml/badge.svg?branch=master)
 
-Optimized smart contract to poke and drip
+Optimized Smart Contract to Poke (`poke`).
 
-For now, hard coded addresses and sequence. Easy for techops to run.
+For Now, Hard Coded Addresses and Sequences. Easy for TechOps to Run.
 
 MegaPoker curent Mainnet Address: [0x63d2ACa166420C9d6a08718477D1b3D403d0085C](https://etherscan.io/address/0x63d2ACa166420C9d6a08718477D1b3D403d0085C#code)
 
 # OmegaPoker
 
-Extensible poker for Kovan and backup for Mainnet.
+Extensible Poker for Goerli, Kovan and **Backup** for Mainnet.
 
-OmegaPoker Kovan Address: [0x7e2531587d25b9fc58aA051D0f19c0Ae809316E9](https://kovan.etherscan.io/address/0x7e2531587d25b9fc58aa051d0f19c0ae809316e9#code)
+The OmegaPoker will gather PIP Addresses from the [Ilk Registry](https://github.com/makerdao/ilk-registry) and Poke ALL Collaterals Without a Redeployment, at the expense of a little gas.
+
+OmegaPoker Goerli Address: [0x091971A1DdDF12450D0D7003A29cD9fb94f8e54c](https://goerli.etherscan.io/address/0x091971a1dddf12450d0d7003a29cd9fb94f8e54c#code)
+
+OmegaPoker Kovan Address: [0xB73c7D82956C9DFd17F8D212b9Cc9062ac04799e](https://kovan.etherscan.io/address/0xB73c7D82956C9DFd17F8D212b9Cc9062ac04799e#code)
 
 OmegaPoker Mainnet Address: [0xC848435494c548Cd4e3213A59521Cd21f74b8CF8](https://etherscan.io/address/0xC848435494c548Cd4e3213A59521Cd21f74b8CF8#code)
 
-At the expense of a little gas, the OmegaPoker will gather pip addresses from the [Ilk Registry](https://github.com/makerdao/ilk-registry) and poke all collaterals without a redeployment.
-
 ## `OmegaPoker.refresh()`
 
-Public function to reset all pips. Call this when a new collateral is added to kovan.
+Public function to reset all PIPs. Call this when a new collateral is onboarded to Goerli, Kovan and **Backup** for Mainnet.
 
 ## `OmegaPoker.poke()`
 
-Public function to poke all ilks. Call after `reset()`
+Public function to poke all ilks. Call after `refresh()`
