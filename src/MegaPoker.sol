@@ -42,6 +42,7 @@ contract PokingAddresses {
     address constant matic          = 0x8874964279302e6d4e523Fb1789981C39a1034Ba;
     address constant wsteth         = 0xFe7a2aC0B945f12089aEEB6eCebf4F384D9f043F;
     address constant guniv3daiusdc1 = 0x7F6d78CC0040c87943a0e0c140De3F77a273bd58;
+    address constant guniv3daiusdc2 = 0xcCBa43231aC6eceBd1278B90c3a44711a00F4e93;
     address constant spotter        = 0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3;
 }
 
@@ -103,9 +104,11 @@ contract MegaPoker is PokingAddresses {
             (ok,) = lrc.call(abi.encodeWithSelector(0x18178358));
             (ok,) = bal.call(abi.encodeWithSelector(0x18178358));
             (ok,) = univ2linketh.call(abi.encodeWithSelector(0x18178358));
-            // The GUINIV3DAIUSDC1-A Oracle is very expensive to poke, and the price should not
-            //  change frequently, so it is getting poked only once a day.
+            // The GUINIV3DAIUSDCX Oracles are very expensive to poke, and the price should not
+            //  change frequently, so they are getting poked only once a day.
             (ok,) = guniv3daiusdc1.call(abi.encodeWithSelector(0x18178358));
+            (ok,) = guniv3daiusdc2.call(abi.encodeWithSelector(0x18178358));
+
 
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAT-A")));
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ZRX-A")));
@@ -113,6 +116,7 @@ contract MegaPoker is PokingAddresses {
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("BAL-A")));
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2LINKETH-A")));
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("GUNIV3DAIUSDC1-A")));
+            (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("GUNIV3DAIUSDC2-A")));
 
             last = block.timestamp;
         }
