@@ -17,7 +17,7 @@ OmegaPoker Goerli Address: [0x091971A1DdDF12450D0D7003A29cD9fb94f8e54c](https://
 
 OmegaPoker Kovan Address: [0xB73c7D82956C9DFd17F8D212b9Cc9062ac04799e](https://kovan.etherscan.io/address/0xB73c7D82956C9DFd17F8D212b9Cc9062ac04799e#code)
 
-OmegaPoker Mainnet Address: [0xC848435494c548Cd4e3213A59521Cd21f74b8CF8](https://etherscan.io/address/0xC848435494c548Cd4e3213A59521Cd21f74b8CF8#code)
+OmegaPoker Mainnet Address: [0xAD0c5607d62b4003D70A5eA55893E23d7E2D3f0C](https://etherscan.io/address/0xAD0c5607d62b4003D70A5eA55893E23d7E2D3f0C#code)
 
 ## `OmegaPoker.refresh()`
 
