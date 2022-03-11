@@ -5,7 +5,7 @@ Optimized Smart Contract to Poke (`poke`).
 
 For Now, Hard Coded Addresses and Sequences. Easy for TechOps to Run.
 
-MegaPoker curent Mainnet Address: [0x8e01D186594983943A614cC724bD1d6F8bFdd41B](https://etherscan.io/address/0x8e01D186594983943A614cC724bD1d6F8bFdd41B#code)
+MegaPoker curent Mainnet Address: [0x70098F537EE8D0E00882585b7B02C45cd6AB3186](https://etherscan.io/address/0x70098F537EE8D0E00882585b7B02C45cd6AB3186#code)
 
 # OmegaPoker
 
