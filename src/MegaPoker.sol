@@ -34,7 +34,7 @@ contract PokingAddresses {
     address constant univ2wbtcdai   = 0x5bB72127a196392cf4aC00Cf57aB278394d24e55;
     address constant matic          = 0x8874964279302e6d4e523Fb1789981C39a1034Ba;
     address constant wsteth         = 0xFe7a2aC0B945f12089aEEB6eCebf4F384D9f043F;
-    address constant crvv1ethsteth  = 0x0A7DA4e31582a2fB4FD4067943e88f127F70ab39;
+    address constant crvv1ethsteth  = 0xEa508F82728927454bd3ce853171b0e2705880D4;
     address constant guniv3daiusdc1 = 0x7F6d78CC0040c87943a0e0c140De3F77a273bd58;
     address constant guniv3daiusdc2 = 0xcCBa43231aC6eceBd1278B90c3a44711a00F4e93;
     address constant spotter        = 0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3;
