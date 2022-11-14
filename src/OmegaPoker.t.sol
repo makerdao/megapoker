@@ -207,7 +207,11 @@ contract OmegaPokerTest is DSTest {
 
         // Ensure we can still refresh and poke
         omegaPoker.refresh();
-        omegaPoker.poke();
+        
+        for (uint i = 0; i < omegaPoker.osmCount(); i++) {
+            address osm = omegaPoker.osms(i);
+            assertTrue(osm != address(0));
+        }
     }
 
     function testPoke() public {
