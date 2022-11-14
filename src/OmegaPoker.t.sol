@@ -63,6 +63,7 @@ interface OsmLike {
 }
 
 interface RegistryEdit {
+    function file(bytes32,bytes32,address) external;
     function removeAuth(bytes32) external;
 }
 
@@ -190,6 +191,20 @@ contract OmegaPokerTest is DSTest {
 
         assertEq(omegaPoker.ilkCount(), ilkcount);    // Ilk should not have been poked because no OSM
         assertEq(omegaPoker.osmCount(), osmcount);    // No osm to remove
+    }
+
+    function testRefreshZeroPip() public {
+        // grant ourselves authority on the ilk registry
+        address registry = address(omegaPoker.registry());
+        hevm.store(registry, keccak256(abi.encode(address(this), uint(0))), bytes32(uint(1)));
+
+        // Ensure we can refresh
+        omegaPoker.refresh();
+
+        RegistryEdit(registry).file("ETH-A", "pip", address(0)); // Remove PIP
+
+        // Ensure we can still refresh
+        omegaPoker.refresh();
     }
 
     function testPoke() public {
