@@ -62,7 +62,9 @@ interface OsmLike {
     function pass() external view returns (bool);
 }
 
-interface RegistryEdit {
+interface RegistryLike {
+    function pip(bytes32) external returns (address);
+    function file(bytes32,bytes32,address) external;
     function removeAuth(bytes32) external;
 }
 
@@ -170,26 +172,46 @@ contract OmegaPokerTest is DSTest {
         assertTrue(ilkcount > 1);
         assertTrue(osmcount > 1);
 
-        RegistryEdit(registry).removeAuth("BAT-A"); // Remove Ilk + OSM
+        RegistryLike(registry).removeAuth("BAT-A"); // Remove Ilk + OSM
 
         omegaPoker.refresh();
 
         assertEq(omegaPoker.ilkCount(), --ilkcount);  // Remove BAT-A ilk from spot call
         assertEq(omegaPoker.osmCount(), --osmcount);  // Remove bat osm
 
-        RegistryEdit(registry).removeAuth("ETH-A"); // Remove Ilk but leave OSM
+        RegistryLike(registry).removeAuth("ETH-A"); // Remove Ilk but leave OSM
 
         omegaPoker.refresh();
 
         assertEq(omegaPoker.ilkCount(), --ilkcount);  // Remove ETH-A ilk from spotter call
         assertEq(omegaPoker.osmCount(), osmcount);    // Do not remove osm because it's used by ETH-B, etc.
 
-        RegistryEdit(registry).removeAuth("USDC-A"); // Remove ilk without OSM
+        RegistryLike(registry).removeAuth("USDC-A"); // Remove ilk without OSM
 
         omegaPoker.refresh();
 
         assertEq(omegaPoker.ilkCount(), ilkcount);    // Ilk should not have been poked because no OSM
         assertEq(omegaPoker.osmCount(), osmcount);    // No osm to remove
+    }
+
+    function testRefreshZeroPip() public {
+        // grant ourselves authority on the ilk registry
+        address registry = address(omegaPoker.registry());
+        hevm.store(registry, keccak256(abi.encode(address(this), uint(0))), bytes32(uint(1)));
+
+        // Ensure we can refresh and poke
+        omegaPoker.refresh();
+
+        RegistryLike(registry).file("ETH-A", "pip", address(0)); // Remove PIP
+        assertEq(RegistryLike(registry).pip("ETH-A"), address(0));
+
+        // Ensure we can still refresh and poke
+        omegaPoker.refresh();
+        
+        for (uint i = 0; i < omegaPoker.osmCount(); i++) {
+            address osm = omegaPoker.osms(i);
+            assertTrue(osm != address(0));
+        }
     }
 
     function testPoke() public {

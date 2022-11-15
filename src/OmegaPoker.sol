@@ -65,6 +65,8 @@ contract OmegaPoker {
 
             address _pip = registry.pip(_ilks[i]);
 
+            if (_pip == address(0)) { continue; }
+
             // OSM's and LP oracles have src() function
             (bool ok,) = _pip.call(abi.encodeWithSelector(srcselector));
 

@@ -13,11 +13,9 @@ Extensible Poker for Goerli, Kovan and **Backup** for Mainnet.
 
 The OmegaPoker will gather PIP Addresses from the [Ilk Registry](https://github.com/makerdao/ilk-registry) and Poke ALL Collaterals Without a Redeployment, at the expense of a little gas.
 
-OmegaPoker Goerli Address: [0x091971A1DdDF12450D0D7003A29cD9fb94f8e54c](https://goerli.etherscan.io/address/0x091971a1dddf12450d0d7003a29cd9fb94f8e54c#code)
+OmegaPoker Goerli Address: [0xD47850BB4Dd0E1ae4D362399f577a47D675cC830](https://goerli.etherscan.io/address/0xD47850BB4Dd0E1ae4D362399f577a47D675cC830#code)
 
-OmegaPoker Kovan Address: [0xB73c7D82956C9DFd17F8D212b9Cc9062ac04799e](https://kovan.etherscan.io/address/0xB73c7D82956C9DFd17F8D212b9Cc9062ac04799e#code)
-
-OmegaPoker Mainnet Address: [0xAD0c5607d62b4003D70A5eA55893E23d7E2D3f0C](https://etherscan.io/address/0xAD0c5607d62b4003D70A5eA55893E23d7E2D3f0C#code)
+OmegaPoker Mainnet Address: [0xDd538C362dF996727054AC8Fb67ef5394eC9b8b9](https://etherscan.io/address/0xDd538C362dF996727054AC8Fb67ef5394eC9b8b9#code)
 
 ## `OmegaPoker.refresh()`
 
