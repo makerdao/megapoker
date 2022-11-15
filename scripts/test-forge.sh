@@ -16,7 +16,7 @@ do
     esac
 done
 
-export DAPP_BUILD_OPTIMIZE=0   # forge turns on optimizer by default
+export DAPP_BUILD_OPTIMIZE=1000
 
 if [[ -z "$MATCH" && -z "$BLOCK" ]]; then
     forge test --fork-url "$ETH_RPC_URL" --force
