@@ -33,6 +33,7 @@ contract PokingAddresses {
     address constant guniv3daiusdc1 = 0x7F6d78CC0040c87943a0e0c140De3F77a273bd58;
     address constant guniv3daiusdc2 = 0xcCBa43231aC6eceBd1278B90c3a44711a00F4e93;
     address constant spotter        = 0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3;
+    address constant reth           = 0xeE7F0b350aA119b3d05DC733a4621a81972f7D47;
 }
 
 contract MegaPoker is PokingAddresses {
@@ -53,6 +54,7 @@ contract MegaPoker is PokingAddresses {
         (ok,) = matic.call(abi.encodeWithSelector(0x18178358));
         (ok,) = wsteth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = crvv1ethsteth.call(abi.encodeWithSelector(0x18178358));
+        (ok,) = reth.call(abi.encodeWithSelector(0x18178358));
 
 
         // poke(bytes32) = 0x1504460f
@@ -72,6 +74,7 @@ contract MegaPoker is PokingAddresses {
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("CRVV1ETHSTETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("WBTC-B")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("WBTC-C")));
+        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("RETH-A")));
 
 
         // Daily pokes
