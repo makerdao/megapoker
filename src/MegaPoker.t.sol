@@ -179,6 +179,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(guniv3daiusdc1, bytes32(uint256(4)), hackedValue);
         hevm.store(guniv3daiusdc2, bytes32(uint256(4)), hackedValue);
         hevm.store(reth, bytes32(uint256(4)), hackedValue);
+        hevm.store(gno, bytes32(uint256(4)), hackedValue);
 
         // Whitelisting tester address
         hevm.store(eth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
@@ -191,6 +192,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(matic, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(wsteth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(reth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
+        hevm.store(gno, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(crvv1ethsteth, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(guniv3daiusdc1, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(guniv3daiusdc2, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
@@ -209,6 +211,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertTrue(OsmLike(wsteth).read() != hackedValue);
         assertTrue(OsmLike(crvv1ethsteth).read() != hackedValue);
         assertTrue(OsmLike(reth).read() != hackedValue);
+        assertTrue(OsmLike(gno).read() != hackedValue);
 
         assertTrue(OsmLike(guniv3daiusdc1).read() != hackedValue);
         assertTrue(OsmLike(guniv3daiusdc2).read() != hackedValue);
@@ -227,6 +230,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertEq(OsmLike(wsteth).read(), hackedValue);
         assertEq(OsmLike(crvv1ethsteth).read(), hackedValue);
         assertEq(OsmLike(reth).read(), hackedValue);
+        assertEq(OsmLike(gno).read(), hackedValue);
 
         // Daily OSM's are not updated after one hour
         assertTrue(OsmLike(guniv3daiusdc1).read() != hackedValue);
@@ -287,6 +291,9 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertEq(spot, _rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("RETH-A");
         (,, spot,,) = VatLike(vat).ilks("RETH-A");
+        assertEq(spot, _rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("GNO-A");
+        (,, spot,,) = VatLike(vat).ilks("GNO-A");
         assertEq(spot, _rdiv(value, mat));
 
         // These collateral types should not be updated after 1 hour
