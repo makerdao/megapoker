@@ -168,12 +168,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         bytes32 hackedValue = 0x0000000000000000000000000000000100000000000000000000000000000123;
         hevm.store(eth, bytes32(uint256(4)), hackedValue);
         hevm.store(btc, bytes32(uint256(4)), hackedValue);
-        hevm.store(mana, bytes32(uint256(4)), hackedValue);
-        hevm.store(link, bytes32(uint256(4)), hackedValue);
-        hevm.store(yfi, bytes32(uint256(4)), hackedValue);
-        hevm.store(univ2usdceth, bytes32(uint256(4)), hackedValue);
         hevm.store(univ2daiusdc, bytes32(uint256(4)), hackedValue);
-        hevm.store(matic, bytes32(uint256(4)), hackedValue);
         hevm.store(wsteth, bytes32(uint256(4)), hackedValue);
         hevm.store(crvv1ethsteth, bytes32(uint256(4)), hackedValue);
         hevm.store(guniv3daiusdc1, bytes32(uint256(4)), hackedValue);
@@ -184,12 +179,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         // Whitelisting tester address
         hevm.store(eth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(btc, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
-        hevm.store(mana, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
-        hevm.store(link, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
-        hevm.store(yfi, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
-        hevm.store(univ2usdceth, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(univ2daiusdc, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
-        hevm.store(matic, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(wsteth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(reth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(gno, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
@@ -202,12 +192,6 @@ contract MegaPokerTest is DSTest, PokingAddresses {
 
         assertTrue(OsmLike(eth).read() != hackedValue);
         assertTrue(OsmLike(btc).read() != hackedValue);
-        assertTrue(OsmLike(mana).read() != hackedValue);
-        assertTrue(OsmLike(link).read() != hackedValue);
-        assertTrue(OsmLike(yfi).read() != hackedValue);
-        assertTrue(OsmLike(univ2usdceth).read() != hackedValue);
-        assertTrue(OsmLike(univ2daiusdc).read() != hackedValue);
-        assertTrue(OsmLike(matic).read() != hackedValue);
         assertTrue(OsmLike(wsteth).read() != hackedValue);
         assertTrue(OsmLike(crvv1ethsteth).read() != hackedValue);
         assertTrue(OsmLike(reth).read() != hackedValue);
@@ -215,18 +199,13 @@ contract MegaPokerTest is DSTest, PokingAddresses {
 
         assertTrue(OsmLike(guniv3daiusdc1).read() != hackedValue);
         assertTrue(OsmLike(guniv3daiusdc2).read() != hackedValue);
+        assertTrue(OsmLike(univ2daiusdc).read() != hackedValue);
 
         hevm.warp(block.timestamp + 1 hours);
         megaPoker.poke();
 
         assertEq(OsmLike(eth).read(), hackedValue);
         assertEq(OsmLike(btc).read(), hackedValue);
-        assertEq(OsmLike(mana).read(), hackedValue);
-        assertEq(OsmLike(link).read(), hackedValue);
-        assertEq(OsmLike(yfi).read(), hackedValue);
-        assertEq(OsmLike(univ2usdceth).read(), hackedValue);
-        assertEq(OsmLike(univ2daiusdc).read(), hackedValue);
-        assertEq(OsmLike(matic).read(), hackedValue);
         assertEq(OsmLike(wsteth).read(), hackedValue);
         assertEq(OsmLike(crvv1ethsteth).read(), hackedValue);
         assertEq(OsmLike(reth).read(), hackedValue);
@@ -235,6 +214,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         // Daily OSM's are not updated after one hour
         assertTrue(OsmLike(guniv3daiusdc1).read() != hackedValue);
         assertTrue(OsmLike(guniv3daiusdc2).read() != hackedValue);
+        assertTrue(OsmLike(univ2daiusdc).read() != hackedValue);
 
         uint256 mat;
         uint256 spot;
@@ -247,32 +227,11 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("WBTC-A");
         (,, spot,,) = VatLike(vat).ilks("WBTC-A");
         assertEq(spot, _rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("MANA-A");
-        (,, spot,,) = VatLike(vat).ilks("MANA-A");
-        assertEq(spot, _rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("LINK-A");
-        (,, spot,,) = VatLike(vat).ilks("LINK-A");
-        assertEq(spot, _rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("ETH-B");
         (,, spot,,) = VatLike(vat).ilks("ETH-B");
         assertEq(spot, _rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("YFI-A");
-        (,, spot,,) = VatLike(vat).ilks("YFI-A");
-        assertEq(spot, _rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("RENBTC-A");
-        (,, spot,,) = VatLike(vat).ilks("RENBTC-A");
-        assertEq(spot, _rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("UNIV2USDCETH-A");
-        (,, spot,,) = VatLike(vat).ilks("UNIV2USDCETH-A");
-        assertEq(spot, _rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("UNIV2DAIUSDC-A");
-        (,, spot,,) = VatLike(vat).ilks("UNIV2DAIUSDC-A");
-        assertEq(spot, _rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("ETH-C");
         (,, spot,,) = VatLike(vat).ilks("ETH-C");
-        assertEq(spot, _rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("MATIC-A");
-        (,, spot,,) = VatLike(vat).ilks("MATIC-A");
         assertEq(spot, _rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("WSTETH-A");
         (,, spot,,) = VatLike(vat).ilks("WSTETH-A");
@@ -303,7 +262,9 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("GUNIV3DAIUSDC2-A");
         (,, spot,,) = VatLike(vat).ilks("GUNIV3DAIUSDC2-A");
         assertTrue(spot != _rdiv(value, mat));
-
+        (, mat) = SpotLike(spotter).ilks("UNIV2DAIUSDC-A");
+        (,, spot,,) = VatLike(vat).ilks("UNIV2DAIUSDC-A");
+        assertTrue(spot != _rdiv(value, mat));
 
         // Daily OSM's are eligible 24 hours after first poked
         hevm.warp(megaPoker.last() + 24 hours);
