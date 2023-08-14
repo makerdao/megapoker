@@ -20,7 +20,7 @@ export DAPP_BUILD_OPTIMIZE=1
 export FOUNDRY_OPTIMIZER_RUNS=1000
 
 if [[ -z "$MATCH" && -z "$BLOCK" ]]; then
-    forge test --fork-url "$ETH_RPC_URL" --force
+    forge test --fork-url "$ETH_RPC_URL" --force -vvv
 elif [[ -n "$MATCH" ]]; then
     forge test --fork-url "$ETH_RPC_URL" --match "$MATCH" -vvv --force
 elif [[ -n "$MATCH_TEST" ]]; then
