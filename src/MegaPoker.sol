@@ -22,6 +22,7 @@ contract PokingAddresses {
     // OSMs
     address constant btc            = 0xf185d0682d50819263941e5f4EacC763CC5C6C42;
     address constant eth            = 0x81FE72B5A8d1A857d176C3E7d5Bd2679A9B85763;
+    address constant gno            = 0xd800ca44fFABecd159c7889c3bf64a217361AEc8;
     address constant reth           = 0xeE7F0b350aA119b3d05DC733a4621a81972f7D47;
     address constant wsteth         = 0xFe7a2aC0B945f12089aEEB6eCebf4F384D9f043F;
 
@@ -44,6 +45,7 @@ contract MegaPoker is PokingAddresses {
         // poke() = 0x18178358
         (ok,) = btc.call(abi.encodeWithSelector(0x18178358));
         (ok,) = eth.call(abi.encodeWithSelector(0x18178358));
+        (ok,) = gno.call(abi.encodeWithSelector(0x18178358));
         (ok,) = reth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = wsteth.call(abi.encodeWithSelector(0x18178358));
 

@@ -168,6 +168,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(btc, bytes32(uint256(4)), hackedValue);
         hevm.store(crvv1ethsteth, bytes32(uint256(4)), hackedValue);
         hevm.store(eth, bytes32(uint256(4)), hackedValue);
+        hevm.store(gno, bytes32(uint256(4)), hackedValue);
         hevm.store(guniv3daiusdc1, bytes32(uint256(4)), hackedValue);
         hevm.store(guniv3daiusdc2, bytes32(uint256(4)), hackedValue);
         hevm.store(reth, bytes32(uint256(4)), hackedValue);
@@ -178,6 +179,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(btc, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(crvv1ethsteth, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(eth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
+        hevm.store(gno, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(guniv3daiusdc1, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(guniv3daiusdc2, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(reth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
@@ -189,6 +191,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
 
         assertTrue(OsmLike(btc).read() != hackedValue);
         assertTrue(OsmLike(eth).read() != hackedValue);
+        assertTrue(OsmLike(gno).read() != hackedValue);
         assertTrue(OsmLike(reth).read() != hackedValue);
         assertTrue(OsmLike(wsteth).read() != hackedValue);
 
@@ -202,6 +205,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
 
         assertEq(OsmLike(btc).read(), hackedValue);
         assertEq(OsmLike(eth).read(), hackedValue);
+        assertEq(OsmLike(gno).read(), hackedValue);
         assertEq(OsmLike(reth).read(), hackedValue);
         assertEq(OsmLike(wsteth).read(), hackedValue);
 
