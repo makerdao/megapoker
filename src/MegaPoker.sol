@@ -24,7 +24,7 @@ contract PokingAddresses {
     address constant eth            = 0x81FE72B5A8d1A857d176C3E7d5Bd2679A9B85763;
     address constant reth           = 0xeE7F0b350aA119b3d05DC733a4621a81972f7D47;
     address constant wsteth         = 0xFe7a2aC0B945f12089aEEB6eCebf4F384D9f043F;
-    address constant mkr            = 0x8C73Af7F91D423Ded3128C366D7FcdD053DCc380;
+    address constant mkr            = 0x4F94e33D0D74CfF5Ca0D3a66F1A650628551C56b;
 
     address constant crvv1ethsteth  = 0xEa508F82728927454bd3ce853171b0e2705880D4;
     address constant guniv3daiusdc1 = 0x7F6d78CC0040c87943a0e0c140De3F77a273bd58;
