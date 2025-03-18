@@ -275,13 +275,11 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("WBTC-C");
         (,, spot,,) = vat.ilks("WBTC-C");
         assertEq(spot, _rdiv(value, mat));
-        assertEq(spot, _rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("LSE-MKR-A");
         (,, spot,,) = vat.ilks("LSE-MKR-A");
         assertEq(spot, _rdiv(value, mat));
 
         // These collateral types should not be updated after 1 hour
-        assertTrue(spot != _rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("GUNIV3DAIUSDC1-A");
         (,, spot,,) = vat.ilks("GUNIV3DAIUSDC1-A");
         assertTrue(spot != _rdiv(value, mat));
