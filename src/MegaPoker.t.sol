@@ -173,7 +173,6 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(eth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(guniv3daiusdc1, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(guniv3daiusdc2, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
-        hevm.store(reth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(univ2daiusdc, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(wsteth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(mkr, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
@@ -222,7 +221,6 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(eth, bytes32(uint256(4)), hackedValue);
         hevm.store(guniv3daiusdc1, bytes32(uint256(4)), hackedValue);
         hevm.store(guniv3daiusdc2, bytes32(uint256(4)), hackedValue);
-        hevm.store(reth, bytes32(uint256(4)), hackedValue);
         hevm.store(univ2daiusdc, bytes32(uint256(4)), hackedValue);
         hevm.store(wsteth, bytes32(uint256(4)), hackedValue);
         hevm.store(mkr, bytes32(uint256(4)), hackedValue);
@@ -232,7 +230,6 @@ contract MegaPokerTest is DSTest, PokingAddresses {
 
         assertTrue(OsmLike(btc).read() != hackedValue);
         assertTrue(OsmLike(eth).read() != hackedValue);
-        assertTrue(OsmLike(reth).read() != hackedValue);
         assertTrue(OsmLike(wsteth).read() != hackedValue);
         assertTrue(OsmLike(mkr).read() != hackedValue);
 
@@ -246,7 +243,6 @@ contract MegaPokerTest is DSTest, PokingAddresses {
 
         assertEq(OsmLike(btc).read(), hackedValue);
         assertEq(OsmLike(eth).read(), hackedValue);
-        assertEq(OsmLike(reth).read(), hackedValue);
         assertEq(OsmLike(wsteth).read(), hackedValue);
         assertEq(OsmLike(mkr).read(), hackedValue);
 
@@ -283,8 +279,6 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         (, mat) = SpotLike(spotter).ilks("WBTC-C");
         (,, spot,,) = vat.ilks("WBTC-C");
         assertEq(spot, _rdiv(value, mat));
-        (, mat) = SpotLike(spotter).ilks("RETH-A");
-        (,, spot,,) = vat.ilks("RETH-A");
         assertEq(spot, _rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("LSE-MKR-A");
         (,, spot,,) = vat.ilks("LSE-MKR-A");

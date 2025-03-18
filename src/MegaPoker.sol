@@ -22,7 +22,6 @@ contract PokingAddresses {
     // OSMs
     address constant btc            = 0xf185d0682d50819263941e5f4EacC763CC5C6C42;
     address constant eth            = 0x81FE72B5A8d1A857d176C3E7d5Bd2679A9B85763;
-    address constant reth           = 0xeE7F0b350aA119b3d05DC733a4621a81972f7D47;
     address constant wsteth         = 0xFe7a2aC0B945f12089aEEB6eCebf4F384D9f043F;
     address constant mkr            = 0x4F94e33D0D74CfF5Ca0D3a66F1A650628551C56b;
 
@@ -45,7 +44,6 @@ contract MegaPoker is PokingAddresses {
         // poke() = 0x18178358
         (ok,) = btc.call(abi.encodeWithSelector(0x18178358));
         (ok,) = eth.call(abi.encodeWithSelector(0x18178358));
-        (ok,) = reth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = wsteth.call(abi.encodeWithSelector(0x18178358));
         (ok,) = mkr.call(abi.encodeWithSelector(0x18178358));
 
@@ -53,7 +51,6 @@ contract MegaPoker is PokingAddresses {
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ETH-B")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("ETH-C")));
-        (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("RETH-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("WBTC-A")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("WBTC-B")));
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("WBTC-C")));
