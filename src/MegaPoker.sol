@@ -61,17 +61,16 @@ contract MegaPoker is PokingAddresses {
         (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("LSEV2-SKY-A")));
 
         // Daily pokes, i.e. reduced cost pokes
+        // The GUINIV3DAIUSDCX Oracles are very expensive to poke, and the
+        // price should not change frequently, so they are getting poked
+        // only once a day.
         if (last <= block.timestamp - 1 days) {
-            // Poke
-            // The GUINIV3DAIUSDCX Oracles are very expensive to poke, and the
-            // price should not change frequently, so they are getting poked
-            // only once a day.
+            // poke() = 0x18178358
             (ok,) = guniv3daiusdc1.call(abi.encodeWithSelector(0x18178358));
             (ok,) = guniv3daiusdc2.call(abi.encodeWithSelector(0x18178358));
-
             (ok,) = univ2daiusdc.call(abi.encodeWithSelector(0x18178358));
 
-            // Spotter pokes
+            // poke(bytes32) = 0x1504460f
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("GUNIV3DAIUSDC1-A")));
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("GUNIV3DAIUSDC2-A")));
             (ok,) = spotter.call(abi.encodeWithSelector(0x1504460f, bytes32("UNIV2DAIUSDC-A")));
