@@ -175,33 +175,34 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(univ2daiusdc, keccak256(abi.encode(address(this), uint256(2))), bytes32(uint256(1)));
         hevm.store(wsteth, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
         hevm.store(mkr, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
+        hevm.store(sky, keccak256(abi.encode(address(this), uint256(5))), bytes32(uint256(1)));
 
         // Initializing any uninitialized OSM and ilks
         uint256 spot;
         bool haz;
 
-        // MKR
+        // SKY
         {
-            // Authorize the MegaPoker in MKR OSM
-            hevm.store(mkr, keccak256(abi.encode(address(megaPoker), uint256(5))), bytes32(uint256(1)));
-            // Authorize the Spotter in MKR OSM
-            hevm.store(mkr, keccak256(abi.encode(address(spotter), uint256(5))), bytes32(uint256(1)));
+            // Authorize the MegaPoker in SKY OSM
+            hevm.store(sky, keccak256(abi.encode(address(megaPoker), uint256(5))), bytes32(uint256(1)));
+            // Authorize the Spotter in SKY OSM
+            hevm.store(sky, keccak256(abi.encode(address(spotter), uint256(5))), bytes32(uint256(1)));
 
-            (,, spot,,) = vat.ilks("LSE-MKR-A");
+            (,, spot,,) = vat.ilks("LSEV2-SKY-A");
             if (spot == 0) {
-                vat.init("LSE-MKR-A");
-                SpotLike(spotter).file("LSE-MKR-A", "pip", mkr);
-                SpotLike(spotter).file("LSE-MKR-A", "mat", 150 * RAY / 100);
+                vat.init("LSEV2-SKY-A");
+                SpotLike(spotter).file("LSEV2-SKY-A", "pip", sky);
+                SpotLike(spotter).file("LSEV2-SKY-A", "mat", 150 * RAY / 100);
 
             }
 
-            (, haz) = OsmLike(mkr).peek();
+            (, haz) = OsmLike(sky).peek();
             if (!haz) {
                 // Whitelist OSM in Median
-                hevm.store(OsmLike(mkr).src(), keccak256(abi.encode(mkr, uint256(4))), bytes32(uint256(1)));
-                OsmLike(mkr).poke();
+                hevm.store(OsmLike(sky).src(), keccak256(abi.encode(sky, uint256(4))), bytes32(uint256(1)));
+                OsmLike(sky).poke();
                 hevm.warp(block.timestamp + 1 hours);
-                OsmLike(mkr).poke();
+                OsmLike(sky).poke();
             }
         }
 
@@ -222,6 +223,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         hevm.store(univ2daiusdc, bytes32(uint256(4)), hackedValue);
         hevm.store(wsteth, bytes32(uint256(4)), hackedValue);
         hevm.store(mkr, bytes32(uint256(4)), hackedValue);
+        hevm.store(sky, bytes32(uint256(4)), hackedValue);
 
         // 0x123
         hackedValue = 0x0000000000000000000000000000000000000000000000000000000000000123;
@@ -230,6 +232,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertTrue(OsmLike(eth).read() != hackedValue);
         assertTrue(OsmLike(wsteth).read() != hackedValue);
         assertTrue(OsmLike(mkr).read() != hackedValue);
+        assertTrue(OsmLike(sky).read() != hackedValue);
 
         assertTrue(OsmLike(guniv3daiusdc1).read() != hackedValue);
         assertTrue(OsmLike(guniv3daiusdc2).read() != hackedValue);
@@ -242,6 +245,7 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertEq(OsmLike(eth).read(), hackedValue);
         assertEq(OsmLike(wsteth).read(), hackedValue);
         assertEq(OsmLike(mkr).read(), hackedValue);
+        assertEq(OsmLike(sky).read(), hackedValue);
 
         // Daily OSM's are not updated after one hour
         assertTrue(OsmLike(guniv3daiusdc1).read() != hackedValue);
@@ -277,6 +281,9 @@ contract MegaPokerTest is DSTest, PokingAddresses {
         assertEq(spot, _rdiv(value, mat));
         (, mat) = SpotLike(spotter).ilks("LSE-MKR-A");
         (,, spot,,) = vat.ilks("LSE-MKR-A");
+        assertEq(spot, _rdiv(value, mat));
+        (, mat) = SpotLike(spotter).ilks("LSEV2-SKY-A");
+        (,, spot,,) = vat.ilks("LSEV2-SKY-A");
         assertEq(spot, _rdiv(value, mat));
 
         // These collateral types should not be updated after 1 hour
